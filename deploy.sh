@@ -4,7 +4,7 @@
 set -e
 
 # 构建
-npm run build --base=/docs/
+npm run build --base=/web-vitails/
 
 # 进入构建文件夹
 cd dist

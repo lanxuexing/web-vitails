@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",
-    "site-build": "slidev build --base=/docs/",
+    "site-build": "slidev build --base=/web-vitails/",
     "export": "slidev export"
   },
   "dependencies": {
