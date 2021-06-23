@@ -30,7 +30,7 @@ title: Web Vitals
 <br/>
 > 网站的开发者需要了解自己的网站给用户带来的体验，但不一定要成为性能优化的专家。Web Vitals旨在简化流程，并帮助网站开发者聚焦在核心性能指标上，也称为Core Web Vitals。
 
-<img class="pt-10 w-100 m-auto opacity-90" src="https://lh6.googleusercontent.com/i9iF8GqgQhXkh1MLRlGQjYRxy_WzXNWTOTvBl5b-HCiL8HTgCk-Qh7PINQ1ruv-q5qUiRNhlpzKMybGzO_nYiTVOxIJoFBxBLRMIPCbI4AIcKLmcMhmh08JWQpCtpJq-hltKhiFi" />
+<img filter="~ dark:invert" class="pt-10 w-100 m-auto" src="https://lh6.googleusercontent.com/i9iF8GqgQhXkh1MLRlGQjYRxy_WzXNWTOTvBl5b-HCiL8HTgCk-Qh7PINQ1ruv-q5qUiRNhlpzKMybGzO_nYiTVOxIJoFBxBLRMIPCbI4AIcKLmcMhmh08JWQpCtpJq-hltKhiFi" />
 
 
 ---
@@ -78,7 +78,7 @@ class: text-center
 
 ---
 
-# 如何准确衡量网站的性能 <Marker class="text-purple-400">Thinking</Marker>
+# 如何准确衡量网站的性能 <Marker class="text-purple-400">思考</Marker>
 
 以用户为中心的性能指标，应该能回答以下四个问题
 
@@ -91,7 +91,7 @@ class: text-center
 
 <style>
   strong {
-    color: #22c55e;
+    @apply text-green-500
   }
 </style>
 
@@ -119,16 +119,44 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 </div>
 
-<img class="m-auto w-170" src="https://static001.infoq.cn/resource/image/42/d7/42c7b4924482fyy59b559054d5837ed7.png"/>
+<img class="m-auto w-170" filter="~ dark:invert" src="https://static001.infoq.cn/resource/image/42/d7/42c7b4924482fyy59b559054d5837ed7.png"/>
 
 <style>
   strong {
-    color: #22c55e;
+    @apply text-green-500
   }
   img {
     margin-top: -90px;
-    filter: invert(100%);
     clip-path: inset(100px 50px 140px 60px);
+  }
+</style>
+
+---
+
+# 是否发生？<Marker class="text-rose-400">问题一</Marker>
+
+当用户访问一个网站的时候，关心的第一个问题永远是“是否发生”——浏览器是否成功地把我的请求发送出去，而服务器是否已经知道并开始处理我的请求？
+
+<div class="grid grid-cols-2 gap-x-4">
+<v-clicks :every='2'>
+
+- **TTFB (Time to First Byte)**
+  - `首字节到达的时间点`
+- **FP (First Paint)**
+  - `首次绘制，标记浏览器渲染任何在视觉上不同于导航前屏幕内容的时间点`
+- **FCP (First Contentful Paint)**
+  - `首次内容绘制，标记浏览器渲染来自DOM第一位内容的时间点，内容可能是文本、图像等元素`
+
+<div class="px-2 py-4">
+  <img filter="~ dark:invert" src="https://static001.infoq.cn/resource/image/bc/0b/bc9cccb614756cd59e24f4baf35f920b.png"/>
+</div>
+
+</v-clicks>
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
   }
 </style>
 
@@ -157,18 +185,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 ```
 
 </div>
-
-<style>
-/* h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  -moz-text-fill-color: transparent;
-} */
-</style>
 
 ---
 
