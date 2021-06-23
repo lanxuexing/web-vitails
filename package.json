@@ -3,13 +3,14 @@
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",
-    "site-build": "slidev build --base=/web-vitails/",
+    "deploy": "slidev build --base=/web-vitails/",
     "export": "slidev export"
   },
   "dependencies": {
     "@slidev/cli": "^0.21.0",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*"
+    "@slidev/theme-seriph": "*",
+    "playwright-chromium": "^1.12.2"
   },
   "name": "web-vitals"
 }
