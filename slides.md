@@ -1,5 +1,4 @@
 ---
-# theme: seriph
 theme: default
 background: '#FFF'
 class: text-center
@@ -16,23 +15,14 @@ title: Web Vitals
 
 谷歌的新一代 Web 性能体验和质量指标
 
-<a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
+<a href="https://github.com/lanxuexing/web-vitails" target="_blank" alt="GitHub"
   class="abs-br m-6 text-xl icon-btn opacity-50 !border-none !hover:text-white">
   <carbon-logo-github />
 </a>
 
-<!-- <div class="abs-bl mx-14 my-12 flex">
-  <div class="ml-3 flex flex-col text-left">
-    <b class="opacity-50">兰学兴</b>
-    <div class="text-sm opacity-50">2021.06</div>
-  </div>
-</div> -->
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
 
 ---
+
 
 # 什么是Web Vitails
 
@@ -40,51 +30,136 @@ The last comment block of each slide will be treated as slide notes. It will be 
 <br/>
 > 网站的开发者需要了解自己的网站给用户带来的体验，但不一定要成为性能优化的专家。Web Vitals旨在简化流程，并帮助网站开发者聚焦在核心性能指标上，也称为Core Web Vitals。
 
-<img class="pt-20 invert-100" src="https://web-dev.imgix.net/image/admin/WNrgCVjmp8Gyc8EbZ9Jv.png?auto=format&w=1600">
+<img class="pt-10 w-100 m-auto opacity-90" src="https://lh6.googleusercontent.com/i9iF8GqgQhXkh1MLRlGQjYRxy_WzXNWTOTvBl5b-HCiL8HTgCk-Qh7PINQ1ruv-q5qUiRNhlpzKMybGzO_nYiTVOxIJoFBxBLRMIPCbI4AIcKLmcMhmh08JWQpCtpJq-hltKhiFi" />
 
-<style>
-  img {
-    filter: invert(1);
-  }
-</style>
+
 ---
 
 
 # Core Web Vitals
 
 <div class="pt-12 flex justify-center">
-  <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/ZZU8Z7TMKXmzZT2mCjJU.svg"/>
-  <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/iHYrrXKe4QRcb2uu8eV8.svg"/>
-  <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/dgpDFckbHwwOKdIGDa3N.svg"/>
+  <div>
+    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/ZZU8Z7TMKXmzZT2mCjJU.svg"/>
+    <p class="text-center opacity-50 cursor-pointer text-sm">
+      <a href="https://web.dev/lcp/" target="_blank" rel="noopener">最大内容绘制</a>
+    </p>
+  </div>
+  <div>
+    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/iHYrrXKe4QRcb2uu8eV8.svg"/>
+    <p class="text-center opacity-50 cursor-pointer text-sm">
+      <a href="https://web.dev/fid/" target="_blank" rel="noopener">首次输入延迟</a>
+    </p>
+  </div>
+  <div>
+    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/dgpDFckbHwwOKdIGDa3N.svg"/>
+    <p class="text-center opacity-50 cursor-pointer text-sm">
+      <a herf="https://web.dev/cls/" target="_blank" rel="noopener">累积布局偏移</a>
+    </p>
+  </div>
 </div>
+
+<!-- 
+LCP：加载体验
+FID：交互性
+CLS：页面内容的视觉稳定性
+ -->
+
+
+---
+layout: center
+class: text-center
+---
+
+# LCP (Largest Contentful Paint)
+
+加载体验 **·** 最大内容绘制
 
 
 ---
 
-# What is Slidev?
+# 如何准确衡量网站的性能 <Marker class="text-purple-400">Thinking</Marker>
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
+以用户为中心的性能指标，应该能回答以下四个问题
 
 <br>
-<br>
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
+- **是否发生？** 导航是否成功启动？服务器是否有响应？
+- **是否有用？** 是否已渲染可以与用户互动的足够内容？
+- **是否有用？** 用户可以与页面交互，还是页面仍在忙于加载？
+- **是否令人愉快？** 交互是否顺畅而自然，没有滞后和卡顿？
 
 <style>
-h1 {
+  strong {
+    color: #22c55e;
+  }
+</style>
+
+---
+
+# 性能指标（Performance Metrics）
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **Load** - 当整个页面加载完成时（包括所有依赖资源，如样式表和图像）触发该事件
+
+```ts
+window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+});
+```
+
+- **DOMContentLoaded** - HTML加载完成时（无需等待样式、图片和子框架加载完成）触发该事件
+
+```ts
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+});
+```
+
+</div>
+
+<img class="m-auto w-170" src="https://static001.infoq.cn/resource/image/42/d7/42c7b4924482fyy59b559054d5837ed7.png"/>
+
+<style>
+  strong {
+    color: #22c55e;
+  }
+  img {
+    margin-top: -90px;
+    filter: invert(100%);
+    clip-path: inset(100px 50px 140px 60px);
+  }
+</style>
+
+---
+
+# LCP (Largest Contentful Paint) <MarkerCore />
+
+最大内容绘制时间，计算从页面开始加载到用户与页面发生交互（点击，滚动）这段时间内，最大元素绘制的时间，该时间会随着页面渲染变化而变化，因为页面中的最大元素在渲染过程中可能会发生改变。
+
+<div class="grid grid-cols-2 gap-x-4 pt-10">
+
+- **Load** - 当整个页面加载完成时（包括所有依赖资源，如样式表和图像）触发该事件。
+
+```ts
+window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+});
+```
+
+- **DOMContentLoaded** - HTML加载完成时（无需等待样式、图片和子框架加载完成）触发该事件。
+
+```ts
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+});
+```
+
+</div>
+
+<style>
+/* h1 {
   background-color: #2B90B6;
   background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
   background-size: 100%;
@@ -92,7 +167,7 @@ h1 {
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent; 
   -moz-text-fill-color: transparent;
-}
+} */
 </style>
 
 ---
