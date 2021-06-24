@@ -139,7 +139,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 当用户访问一个网站的时候，关心的第一个问题永远是“是否发生”——浏览器是否成功地把我的请求发送出去，而服务器是否已经知道并开始处理我的请求？
 
 <div class="grid grid-cols-2 gap-x-4">
-<v-clicks :every='2'>
 
 - **TTFB (Time to First Byte)**
   - `首字节到达的时间点`
@@ -152,7 +151,33 @@ window.addEventListener('DOMContentLoaded', (event) => {
   <img filter="~ dark:invert" src="https://static001.infoq.cn/resource/image/bc/0b/bc9cccb614756cd59e24f4baf35f920b.png"/>
 </div>
 
-</v-clicks>
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
+
+# 是否有用？<Marker class="text-rose-400">问题二</Marker>
+
+当用户确定自己的请求发生了后，就会开始关心第二个问题：“是否有用？”
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **FMP (First Meaningful Paint)**
+  - `首次有效绘制，是指首次绘制对用户有用内容的时间点`
+- **LCP (Largest Contentful Paint)**
+  - `最大内容绘制时间，计算从页面开始加载到用户与页面发生交互（点击，滚动）这段时间内，最大元素绘制的时间，该时间会随着页面渲染变化而变化，因为页面中的最大元素在渲染过程中可能会发生改变`
+- **SI (Speed Index)**
+  - `速度指标，填充页面内容的速度，取开始加载到最后完成渲染，每一时刻页面未完成度的积分`
+
+<div class="px-2 py-4">
+  <img filter="~ dark:invert" src="https://static001.infoq.cn/resource/image/df/7e/dfdaf0555fd31ae467ddb700e2897f7e.png"/>
+</div>
+
 </div>
 
 <style>
