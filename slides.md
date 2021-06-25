@@ -36,49 +36,6 @@ title: Web Vitals
 
 ---
 
-
-# Core Web Vitals
-
-<div class="pt-12 flex justify-center">
-  <div>
-    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/ZZU8Z7TMKXmzZT2mCjJU.svg"/>
-    <p class="text-center opacity-50 cursor-pointer text-sm">
-      <a href="https://web.dev/lcp/" target="_blank" rel="noopener">最大内容绘制</a>
-    </p>
-  </div>
-  <div>
-    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/iHYrrXKe4QRcb2uu8eV8.svg"/>
-    <p class="text-center opacity-50 cursor-pointer text-sm">
-      <a href="https://web.dev/fid/" target="_blank" rel="noopener">首次输入延迟</a>
-    </p>
-  </div>
-  <div>
-    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/dgpDFckbHwwOKdIGDa3N.svg"/>
-    <p class="text-center opacity-50 cursor-pointer text-sm">
-      <a herf="https://web.dev/cls/" target="_blank" rel="noopener">累积布局偏移</a>
-    </p>
-  </div>
-</div>
-
-<!-- 
-LCP：加载体验
-FID：交互性
-CLS：页面内容的视觉稳定性
- -->
-
-
----
-layout: center
-class: text-center
----
-
-# LCP (Largest Contentful Paint)
-
-加载体验 **·** 最大内容绘制
-
-
----
-
 # 如何准确衡量网站的性能 <Marker class="text-purple-400">思考</Marker>
 
 以用户为中心的性能指标，应该能回答以下四个问题
@@ -188,29 +145,207 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 ---
 
+
+# 是否有用？<Marker class="text-rose-400">问题三</Marker>
+
+在用户得到了有用的信息后，用户就会基于得到的信息作出反应，这就是页面“是否可用？”
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **Long Tasks**
+  - `耗时任务。浏览器是单线程，所有任务会被添加到主线程的队列中逐个执行。如果有任务耗时过长，主线程就会被阻塞，其他任务就只能等待，包括那些由用户交互产生的任务，从而无法及时响应用户`
+- **TTI (Time to Interactive)**
+  - `可交互时间，用于标记页面已进行视觉渲染并能可靠响应用户输入的时间点`
+- **TBT (Total Blocking Time)**
+  - `总共阻塞时间，计算的是从 FCP 到 TTI 之间，主线程阻塞的总时间`
+- **FID (First Input Delay)**
+  - `首次输入延迟，指用户首次输入到页面响应的时间`
+
+<div class="px-2 py-4">
+  <img filter="~ dark:invert" src="https://static001.infoq.cn/resource/image/bb/21/bb5yyd9fab93e2ff660a38685de67621.png"/>
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
+
+# 是否令人愉快？<Marker class="text-rose-400">问题四</Marker>
+
+在用户得到了有用的信息后，用户就会基于得到的信息作出反应，这就是页面“是否可用？”
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **CLS (Cumulative Layout Shift)**
+  - `累计布局偏移。测量在页面的整个生命周期中发生的每个意外的样式移动所造成的布局偏移分数的总和`
+
+<div class="px-2 py-4">
+  <img filter="~ dark:invert" src="https://static001.infoq.cn/resource/image/c0/1a/c0c492896796599a38731cd0390a3b1a.gif"/>
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
+layout: center
+class: text-center
+---
+
+# Core Web Vitals
+
+核心性能指标
+
+----
+
+
+# Core Web Vitals
+
+<div class="pt-12 flex justify-center">
+  <div>
+    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/ZZU8Z7TMKXmzZT2mCjJU.svg"/>
+    <p class="text-center opacity-50 cursor-pointer text-sm">
+      <a href="https://web.dev/lcp/" target="_blank" rel="noopener">最大内容绘制</a>
+    </p>
+  </div>
+  <div>
+    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/iHYrrXKe4QRcb2uu8eV8.svg"/>
+    <p class="text-center opacity-50 cursor-pointer text-sm">
+      <a href="https://web.dev/fid/" target="_blank" rel="noopener">首次输入延迟</a>
+    </p>
+  </div>
+  <div>
+    <img class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/dgpDFckbHwwOKdIGDa3N.svg"/>
+    <p class="text-center opacity-50 cursor-pointer text-sm">
+      <a herf="https://web.dev/cls/" target="_blank" rel="noopener">累积布局偏移</a>
+    </p>
+  </div>
+</div>
+
+<!-- 
+LCP：加载体验
+FID：交互性
+CLS：页面内容的视觉稳定性
+ -->
+
+---
+layout: center
+class: text-center
+---
+
+# LCP (Largest Contentful Paint)
+
+衡量加载体验 **·** 最大内容绘制
+
+---
+
 # LCP (Largest Contentful Paint) <MarkerCore />
 
-最大内容绘制时间，计算从页面开始加载到用户与页面发生交互（点击，滚动）这段时间内，最大元素绘制的时间，该时间会随着页面渲染变化而变化，因为页面中的最大元素在渲染过程中可能会发生改变。
+最大内容绘制时间，用来衡量加载体验，Google要求LCP最好在页面首次开始加载后的2.5秒内发生
 
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
-- **Load** - 当整个页面加载完成时（包括所有依赖资源，如样式表和图像）触发该事件。
-
 ```ts
-window.addEventListener('load', (event) => {
-  console.log('page is fully loaded');
+<img src="large_image.jpg">
+<p id='large-paragraph'>This is large body of text.</p>
+...
+<script>
+const observer = new PerformanceObserver((list) => {
+  let perfEntries = list.getEntries();
+  let lastEntry = perfEntries[perfEntries.length - 1];
+  // 处理相关指标信息
 });
+observer.observe({entryTypes: ['largest-contentful-paint']});
+</script>
 ```
 
-- **DOMContentLoaded** - HTML加载完成时（无需等待样式、图片和子框架加载完成）触发该事件。
-
 ```ts
-window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
-});
+<img elementtiming="hero-image" />
+<p elementtiming="important-paragraph">This is text I care about.</p>
+...
+<script>
+// 捕获错误，因为某些浏览器在使用新的 `type` 选项时会抛出错误
+try {
+  // 创建性能观察器
+  const po = new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      // 打印记录条目和所有相关的详细信息
+      console.log(entry.toJSON());
+    }
+  });
+  // 开始监听要调度的 `element` 条目
+  po.observe({type: 'element', buffered: true});
+} catch (e) {
+  // 如果浏览器不支持此 API，则什么也不做
+}
+</script>
 ```
 
 </div>
+
+---
+layout: center
+class: text-center
+---
+
+# CLS (Cumulative Layout Shift)
+
+衡量视觉稳定性 **·** 累积布局偏移
+
+---
+name: Web-Vitails
+layout: center
+---
+
+<div class="grid grid-cols-[3fr,2fr] gap-4">
+  <div class="text-center pb-4">
+    <div class="my-auto">
+      <img class="h-20 inline-block rounded-xl" src="https://lh3.googleusercontent.com/9K-n57PrCZrkKjvP1B68H8qnGTfU6Y_XQq71uTGqVDgkiHdxeYYgioFkNv8sERCh6V-03Su3-asYsopDUiLyFIIG=w128-h128-e365-rj-sc0x00ffffff">
+      <p>Web-Vitals</p>
+      <div class="opacity-50 mb-2 text-sm">
+        Essential metrics for a healthy site
+      </div>
+    </div>
+    <div class="text-center">
+      <a class="!border-none" href="https://www.npmjs.com/package/web-vitals" target="__blank">
+        <img class="h-4 inline mx-0.5" src="https://img.shields.io/npm/v/web-vitals?color=a1b858&label=" alt="NPM version">
+      </a>
+      <a class="!border-none" href="https://www.npmjs.com/package/web-vitals" target="__blank">
+        <img class="h-4 inline mx-0.5" alt="NPM Downloads" src="https://img.shields.io/npm/dm/web-vitals?color=50a36f&label=">
+      </a>
+      <a class="!border-none" href="https://web.dev/vitals" target="__blank">
+        <img class="h-4 inline mx-0.5" src="https://img.shields.io/static/v1?label=&message=docs%20%26%20demos&color=1e8a7a" alt="Docs & Demos">
+      </a>
+      <img class="h-4 inline mx-0.5" alt="Function Count" src="https://img.shields.io/badge/-~1k%20tiny-13708a">
+      <br>
+      <a class="!border-none" href="https://github.com/GoogleChrome/web-vitals" target="__blank">
+        <img class="mt-2 h-4 inline mx-0.5" alt="GitHub stars" src="https://img.shields.io/github/stars/GoogleChrome/web-vitals?style=social">
+      </a>
+    </div>
+  </div>
+  <div class="border-l border-gray-400 border-opacity-25 !all:leading-12 !all:list-none my-auto">
+
+  - 轻量 体积～1k
+  - Tree-shakeable ESM
+  - Supports any JavaScript project
+  - CDN 兼容
+
+  </div>
+</div>
+
+
+---
+
+<Tweet id="1406831784701136902" scale="0.65" />
 
 ---
 
