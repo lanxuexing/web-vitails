@@ -231,12 +231,6 @@ class: text-center
   </div>
 </div>
 
-<!-- 
-LCP：加载体验
-FID：交互性
-CLS：页面内容的视觉稳定性
- -->
-
 ---
 layout: center
 class: text-center
@@ -254,6 +248,102 @@ class: text-center
 
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
+- **定义**
+  - `视口内可见的最大图像或文本块的渲染时间，相对于页面首次开始加载的时间`
+- **为什么是LCP？**
+  - `Load、DOMContentLoaded 指标不友好，例如Skeleton骨架屏、Loading加载器`
+  - `FMP、SI指标复杂，有的时候甚至是错的`
+- **怎样才算好？**
+  - <img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/elqsdYqQEefWJbUM2qMO.svg"/>
+
+<div>
+
+  - **LCP关注哪些元素？**
+    - `<img>元素`
+    - `<image>元素内的<svg>元素`
+    - `<video>元素（仅仅指poster海报图）`
+    - `通过 url() 函数加载背景图片的元素`
+    - `包含文本节点或其他内联文本元素子级的块级元素`
+
+  - **就这？**
+    - `显然不止于此，这些元素只是目前LCP分数考虑的元素类型，之后随着研究的深入，会陆续进行更新`
+
+</div>
+
+</div>
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
+
+<div class="grid grid-cols-2 gap-x-4"><div>
+
+# Rules
+如何确定元素的大小
+
+<div class="mt-10"></div>
+
+### 图像
+- 视口viewport内可见visible元素的大小
+  > clip和overflow等将被忽略
+- 缩小图像的大小以缩小显示的为准
+- 拉伸后的图像以图像的原始尺寸为准
+
+
+<div class="mt-10"></div>
+
+### 文本
+
+- 仅考虑其文本节点的大小
+- 所有元素，均不考虑 **margin/padding/border** 样式
+
+
+</div><div>
+
+# Outputs
+什么时候应该记录
+
+<div class="mt-10"></div>
+
+### API
+
+- 网页分阶段加载，页面最大的元素可能会发生变化
+- PerformanceEntry API 调度与记录
+
+<div class="mt-2"></div>
+
+```html
+<img src="large_image.jpg">
+<p id='large-paragraph'>This is large body of text.</p>
+...
+<script>
+const observer = new PerformanceObserver((list) => {
+  let perfEntries = list.getEntries();
+  let lastEntry = perfEntries[perfEntries.length - 1];
+  // 处理相关指标信息
+});
+observer.observe({entryTypes: ['largest-contentful-paint']});
+</script>
+```
+
+</div></div>
+
+<style>
+  h3 {
+    @apply text-green-500 !opacity-100
+  }
+</style>
+
+---
+
+
+- **在 JavaScript 中测量 LCP**
+
 ```ts
 <img src="large_image.jpg">
 <p id='large-paragraph'>This is large body of text.</p>
@@ -267,6 +357,8 @@ const observer = new PerformanceObserver((list) => {
 observer.observe({entryTypes: ['largest-contentful-paint']});
 </script>
 ```
+
+
 
 ```ts
 <img elementtiming="hero-image" />
@@ -289,8 +381,6 @@ try {
 }
 </script>
 ```
-
-</div>
 
 ---
 layout: center
