@@ -314,22 +314,15 @@ class: text-center
 
 - 网页分阶段加载，页面最大的元素可能会发生变化
 - PerformanceEntry API 调度与记录
+  > 浏览器在浏览器绘制第一帧后立即调度PerformanceEntry记录LCP，之后有最大元素出现则更新
 
-<div class="mt-2"></div>
 
-```html
-<img src="large_image.jpg">
-<p id='large-paragraph'>This is large body of text.</p>
-...
-<script>
-const observer = new PerformanceObserver((list) => {
-  let perfEntries = list.getEntries();
-  let lastEntry = perfEntries[perfEntries.length - 1];
-  // 处理相关指标信息
-});
-observer.observe({entryTypes: ['largest-contentful-paint']});
-</script>
-```
+<div class="mt-10"></div>
+
+### 边界条件
+
+- 当前是最大内容元素从视口中删除（或从DOM中删除），除非呈现更大的元素，否则原来将被保持
+- 一旦用户与页面交互（通过点击、滚动或按键），浏览器将停止记录LCP
 
 </div></div>
 
@@ -341,16 +334,61 @@ observer.observe({entryTypes: ['largest-contentful-paint']});
 
 ---
 
+<div class="grid grid-cols-2 gap-x-4"><div>
 
-- **在 JavaScript 中测量 LCP**
+# 案例一
 
-```ts
+### 新内容被添加到 DOM 中并且改变了最大的元素
+
+<img class="w-100 mb-4 mt-4" src="https://web-dev.imgix.net/image/admin/bsBm8poY1uQbq7mNvVJm.png"/>
+
+### 布局更改并且以前最大的内容从视口中删除
+
+<img class="w-100 mt-4" src="https://web-dev.imgix.net/image/admin/xAvLL1u2KFRaqoZZiI71.png"/>
+
+</div><div>
+
+# 案例二
+
+### IG 徽标加载早，即使其他内容逐渐显示，它仍然是最大的元素
+
+<img class="w-100 mb-4 mt-4" src="https://web-dev.imgix.net/image/admin/uJAGswhXK3bE6Vs4I5bP.png"/>
+
+### 最大的元素是一段文本从一开始就出现且贯穿始终
+
+<img class="w-100 mt-4" src="https://web-dev.imgix.net/image/admin/e0O2woQjZJ92aYlPOJzT.png"/>
+
+</div></div>
+
+<style>
+  h3 {
+    @apply text-amber-500 !opacity-100
+  }
+</style>
+
+---
+
+# 在 JavaScript 中如何测量 LCP ?
+
+Largest Contentful Paint API
+
+<div class="grid grid-cols-2 gap-x-4">
+
+```html
+<!-- 
+  API与指标之间的差异：
+    1. Tab选项卡
+    2. 浏览器的前进和后退
+    3. iframe
+    4. ...
+ -->
 <img src="large_image.jpg">
 <p id='large-paragraph'>This is large body of text.</p>
 ...
 <script>
-const observer = new PerformanceObserver((list) => {
-  let perfEntries = list.getEntries();
+// 创建性能观察器
+const observer = new PerformanceObserver((entryList) => {
+  let perfEntries = entryList.getEntries();
   let lastEntry = perfEntries[perfEntries.length - 1];
   // 处理相关指标信息
 });
@@ -358,9 +396,8 @@ observer.observe({entryTypes: ['largest-contentful-paint']});
 </script>
 ```
 
-
-
-```ts
+```html
+<!-- 最大元素与最重要有差异？自定义指标 -->
 <img elementtiming="hero-image" />
 <p elementtiming="important-paragraph">This is text I care about.</p>
 ...
@@ -381,6 +418,67 @@ try {
 }
 </script>
 ```
+
+</div>
+
+
+---
+clicks: 6
+---
+
+# 如何改进 LCP ？
+
+<div class="grid grid-cols-2 gap-x-4 gap-y-4">
+
+### 对象式 API 存在的问题
+
+### 影响 LCP 的因素
+
+<v-clicks at="1">
+
+- 服务器响应速度慢
+- JavaScript 和 CSS 阻塞渲染
+- 资源加载时间
+- 客户端渲染
+
+</v-clicks>
+
+<v-clicks at="1">
+
+- 应用 PRPL 即时加载
+- 优化关键渲染路径
+- 优化 CSS
+- 优化 Image
+- 优化 Web Font
+- 优化 JavaScript
+
+</v-clicks>
+
+</div>
+
+<style>
+  h3 {
+    @apply text-green-500 !opacity-100
+  }
+</style>
+
+
+---
+layout: center
+---
+
+# 以上优化，没有听懂？还有没其他优化点？
+
+---
+layout: center
+class: text-center
+---
+
+# Optimize Largest Contentful Paint（LCP）
+
+<Youtube id="AQqFZ5t8uNc?start=1073" width="800" height="450"/>
+
+---
 
 ---
 layout: center
