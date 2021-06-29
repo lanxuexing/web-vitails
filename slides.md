@@ -426,13 +426,13 @@ try {
 clicks: 6
 ---
 
-# 如何改进 LCP ？
+# 如何优化 LCP ？
 
 <div class="grid grid-cols-2 gap-x-4 gap-y-4">
 
-### 对象式 API 存在的问题
-
 ### 影响 LCP 的因素
+
+### 优化 LCP 的建议
 
 <v-clicks at="1">
 
@@ -464,6 +464,50 @@ clicks: 6
 
 
 ---
+
+# Optimize CSS <Marker class="text-orange-400">技巧</Marker>
+
+```ts
+type MaybeRef<T> = Ref<T> | T
+```
+
+<v-clicks>
+
+在 VueUse 中我们大量地使用 `MaybeRef` 来支持可选择性的响应式参数
+
+```ts
+export function useTimeAgo(
+  time: Date | number | string | Ref<Date | number | string>,
+) {
+  return computed(() => someFormating(unref(time)))
+}
+```
+
+```ts
+import { computed, unref, Ref } from 'vue'
+
+type MaybeRef<T> = Ref<T> | T
+
+export function useTimeAgo(
+  time: MaybeRef<Date | number | string>,
+) {
+  return computed(() => someFormating(unref(time)))
+}
+```
+
+</v-clicks>
+
+
+---
+layout: center
+class: text-center
+---
+
+# Optimize LCP（Largest Contentful Paint）
+优化最大的内容绘制
+
+
+---
 layout: center
 ---
 
@@ -479,6 +523,13 @@ class: text-center
 <Youtube id="AQqFZ5t8uNc?start=1073" width="800" height="450"/>
 
 ---
+layout: center
+class: text-center
+---
+
+# FID (First Input Delay)
+
+衡量页面交互性 **·** 首次输入延迟
 
 ---
 layout: center
