@@ -423,8 +423,6 @@ try {
 
 
 ---
-clicks: 6
----
 
 # 如何优化 LCP ？
 
@@ -443,7 +441,7 @@ clicks: 6
 
 </v-clicks>
 
-<v-clicks at="1">
+<v-clicks at="5">
 
 - 应用 PRPL 即时加载
 - 优化关键渲染路径
@@ -464,39 +462,93 @@ clicks: 6
 
 
 ---
+clicks: 2
+---
 
-# Optimize CSS <Marker class="text-orange-400">技巧</Marker>
-
-```ts
-type MaybeRef<T> = Ref<T> | T
-```
-
-<v-clicks>
-
-在 VueUse 中我们大量地使用 `MaybeRef` 来支持可选择性的响应式参数
+# Optimize CSS <Marker class="text-orange-400">技巧一</Marker>
 
 ```ts
-export function useTimeAgo(
-  time: Date | number | string | Ref<Date | number | string>,
-) {
-  return computed(() => someFormating(unref(time)))
-}
+// Minify CSS Plugin
+npm install --save-dev optimize-css-assets-webpack-plugin
 ```
+
+```html {all|7|all}
+<!-- 使用媒体查询优化 CSS 背景图像 -->
+<style>
+  body {
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat; background-size: cover;
+    background-image: url(images/background-desktop.jpg); // 这一行可以使用 `@media` 来适配不同屏幕
+  }
+  // 手机
+  @media (max-width: 480px) {
+    body { background-image: url(images/background-mobile.jpg); }
+  }
+  // 平板
+  @media (min-width: 481px) and (max-width: 1024px) {
+    body { background-image: url(images/background-tablet.jpg); }
+  }
+  // PC
+  @media (min-width: 1025px) {
+    body { background-image: url(images/background-desktop.jpg); }
+  }
+</style>
+```
+
+<arrow v-click="1" v-show="2" x1="400" y1="420" x2="230" y2="300" color="#564" width="3" arrowSize="1" />
+
+---
+
+# Optimize CSS <Marker class="text-orange-400">技巧二</Marker>
+
+```html
+<!-- 关键渲染路径：找出渲染首屏的最小 CSS 集合（Critical CSS），并把它们写到 <head> 部分，从而让浏览器接收到 HTML 文件后就尽快渲染出页面 -->
+<head>
+  <meta charset="UTF-8">
+  <!-- 提取（Extract）关键CSS，内联 -->
+  <style type="text/css">
+    .accordion-btn {background-color: #ADD8E6;color: #444;cursor: pointer;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;transition: 0.4s;}.container {padding: 0 18px;display: none;background-color: white;overflow: hidden;}h1 {word-spacing: 5px;color: blue;font-weight: bold;text-align: center;}
+  </style>
+
+  <!-- 非关键CSS异步外链 -->
+  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
+</head>
+```
+
+<v-click>
+
+<div class="mt-4"></div>
+
+- 提取、压缩、内联首屏CSS
 
 ```ts
-import { computed, unref, Ref } from 'vue'
-
-type MaybeRef<T> = Ref<T> | T
-
-export function useTimeAgo(
-  time: MaybeRef<Date | number | string>,
-) {
-  return computed(() => someFormating(unref(time)))
-}
+npm i -D critical // 自动检测，可配置，从html中提取critical css，并将critical-path内联到html中
+npm i --save-dev html-critical-webpack-plugin  // webpack plugin
+npm install criticalcss // 支持 `cli`，对 `@font-face` 支持更友好和精确
 ```
 
-</v-clicks>
+</v-click>
+<v-click>
 
+- 站点或应用程序具有大量动态注入 DOM 的样式（**内部使用puppeteer**）
+
+```ts
+npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默认是 `extractCss` 为 true (提取到独立的文件中，方便缓存)
+```
+
+<!--
+网页渲染时，浏览器解析只有在完成 <head> 部分 CSS 样式的加载、解析之后才会渲染页面。这种渲染方式意味着，如果 CSS 文件很大，那么用户就必须等待很长的时间才能看到渲染结果。
+-->
+
+</v-click>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
 
 ---
 layout: center
