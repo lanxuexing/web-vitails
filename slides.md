@@ -21,9 +21,7 @@ title: Web Vitals
   <carbon-logo-github />
 </a>
 
-
 ---
-
 
 # 什么是Web Vitails
 
@@ -32,7 +30,6 @@ title: Web Vitals
 > 网站的开发者需要了解自己的网站给用户带来的体验，但不一定要成为性能优化的专家。Web Vitals旨在简化流程，并帮助网站开发者聚焦在核心性能指标上，也称为Core Web Vitals。
 
 <img filter="~ dark:invert" class="pt-10 w-100 m-auto" src="https://lh6.googleusercontent.com/i9iF8GqgQhXkh1MLRlGQjYRxy_WzXNWTOTvBl5b-HCiL8HTgCk-Qh7PINQ1ruv-q5qUiRNhlpzKMybGzO_nYiTVOxIJoFBxBLRMIPCbI4AIcKLmcMhmh08JWQpCtpJq-hltKhiFi" />
-
 
 ---
 
@@ -63,7 +60,7 @@ title: Web Vitals
 
 ```ts
 window.addEventListener('load', (event) => {
-  console.log('page is fully loaded');
+  console.log('页面已完全加载');
 });
 ```
 
@@ -71,7 +68,7 @@ window.addEventListener('load', (event) => {
 
 ```ts
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
+  console.log('DOM 完全加载和解析');
 });
 ```
 
@@ -145,7 +142,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 ---
 
-
 # 是否有用？<Marker class="text-rose-400">问题三</Marker>
 
 在用户得到了有用的信息后，用户就会基于得到的信息作出反应，这就是页面“是否可用？”
@@ -206,7 +202,6 @@ class: text-center
 核心性能指标
 
 ----
-
 
 # Core Web Vitals
 
@@ -421,6 +416,13 @@ try {
 
 </div>
 
+---
+layout: center
+class: text-center
+---
+
+# Optimize LCP（Largest Contentful Paint）
+优化最大的内容绘制
 
 ---
 
@@ -459,7 +461,6 @@ try {
     @apply text-green-500 !opacity-100
   }
 </style>
-
 
 ---
 clicks: 2
@@ -530,6 +531,7 @@ npm install criticalcss // 支持 `cli`，对 `@font-face` 支持更友好和精
 ```
 
 </v-click>
+
 <v-click>
 
 - 站点或应用程序具有大量动态注入 DOM 的样式（**内部使用puppeteer**）
@@ -538,10 +540,6 @@ npm install criticalcss // 支持 `cli`，对 `@font-face` 支持更友好和精
 npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默认是 `extractCss` 为 true (提取到独立的文件中，方便缓存)
 ```
 
-<!--
-网页渲染时，浏览器解析只有在完成 <head> 部分 CSS 样式的加载、解析之后才会渲染页面。这种渲染方式意味着，如果 CSS 文件很大，那么用户就必须等待很长的时间才能看到渲染结果。
--->
-
 </v-click>
 
 <style>
@@ -549,15 +547,6 @@ npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默�
     @apply text-green-500
   }
 </style>
-
----
-layout: center
-class: text-center
----
-
-# Optimize LCP（Largest Contentful Paint）
-优化最大的内容绘制
-
 
 ---
 layout: center
