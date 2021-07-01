@@ -544,7 +544,40 @@ npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默�
 
 <style>
   strong {
-    @apply text-green-500
+    @apply text-green-500;
+  }
+</style>
+
+---
+
+# Optimize Images <Marker class="text-orange-400">技巧一</Marker>
+
+- 图片压缩
+
+```sh
+// 使用Imagemin压缩图片，支持 `cli` 和 `npm`
+$ imagemin images/* --out-dir=images // 要压缩 `images/` 目录中的图像并将它们保存到同一目录（覆盖原图）
+
+$ npm i imagemin-webpack-plugin -D // webpack plugin
+```
+
+<div class="mt-4"></div>
+
+- 选择合适的图片格式
+
+ 图片格式 | 透明度 | 动画 | 浏览器支持
+ ---|---|---|---
+ PNG  | Yes | No  | All
+ JPEG | No  | No  | All
+ WebP | Yes | Yes | 现代浏览器
+
+<div class="mt-4"></div>
+
+> WebP格式的图像比J PEG 和 PNG 图像小 25 ~ 35%，可以显著提升页面加载性能
+
+<style>
+  ul li {
+    @apply text-green-500;
   }
 </style>
 
