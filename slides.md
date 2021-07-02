@@ -451,6 +451,8 @@ class: text-center
 - 优化 Image
 - 优化 Web Font
 - 优化 JavaScript
+- 使用 Gzip 和 Brotli 压缩页面资源，降低传输时间
+- 使用 service worker 缓存资源
 
 </v-clicks>
 
@@ -512,7 +514,7 @@ npm install --save-dev optimize-css-assets-webpack-plugin
     .accordion-btn {background-color: #ADD8E6;color: #444;cursor: pointer;padding: 18px;width: 100%;border: none;text-align: left;outline: none;font-size: 15px;transition: 0.4s;}.container {padding: 0 18px;display: none;background-color: white;overflow: hidden;}h1 {word-spacing: 5px;color: blue;font-weight: bold;text-align: center;}
   </style>
 
-  <!-- 非关键CSS异步外链 -->
+  <!-- 非关键CSS异步外链（增加 rel="preload" 属性预加载） -->
   <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="styles.css"></noscript>
 </head>
@@ -574,6 +576,49 @@ $ npm i imagemin-webpack-plugin -D // webpack plugin
 <div class="mt-4"></div>
 
 > WebP格式的图像比J PEG 和 PNG 图像小 25 ~ 35%，可以显著提升页面加载性能
+
+<div class="mt-4"></div>
+
+- 使用CDN
+
+<style>
+  ul li {
+    @apply text-green-500;
+  }
+</style>
+
+
+---
+
+# Optimize Images <Marker class="text-orange-400">技巧二</Marker>
+
+- 用视频替换 GIF 动画以加快页面加载速度
+
+```ts
+// 使用 FFmpeg 将 GIF 转换为 MP4 视频
+ffmpeg -i my-animation.gif -b:v 0 -crf 25 -f mp4 -vcodec libx264 -pix_fmt yuv420p my-animation.mp4
+
+// 使用 FFmpeg 将 GIF 转换为 WebM 视频
+ffmpeg -i my-animation.gif -c vp9 -b:v 0 -crf 41 my-animation.webm
+
+// GIF动画三大特征：1.自动播放  2. 连续循环 3. 静音
+<video autoplay loop muted playsinline>
+  <source src="my-animation.webm" type="video/webm">
+  <source src="my-animation.mp4" type="video/mp4">
+</video>
+```
+
+<div class="mt-4"></div>
+
+- 选择合适的图像尺寸
+
+```ts
+// 使用 ImageMagick 调整图像大小（具有创建、编辑、合成和转换功能，支持200+图像格式）
+convert flower.jpg -resize 25% flower_small.jpg // 将图像大小调整为原始大小的 25%
+
+# macOS/Linux
+convert flower.jpg -resize 200x100 flower_small.jpg // 缩放图像以适应 “200px 宽 x 100px 高”
+```
 
 <style>
   ul li {
