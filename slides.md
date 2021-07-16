@@ -2,7 +2,6 @@
 theme: default
 background: '#FFF'
 class: text-center
-download: true
 highlighter: shiki
 info: |
   ## Slidev Starter Template

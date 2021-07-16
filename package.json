@@ -7,10 +7,9 @@
     "export": "slidev export"
   },
   "dependencies": {
-    "@slidev/cli": "^0.21.0",
+    "@slidev/cli": "^0.22.5",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*",
-    "playwright-chromium": "^1.12.2"
+    "@slidev/theme-seriph": "*"
   },
   "name": "web-vitals"
 }
