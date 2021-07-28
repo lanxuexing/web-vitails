@@ -650,6 +650,43 @@ class: text-center
 衡量页面交互性 **·** 首次输入延迟
 
 ---
+
+# FID (First Input Delay) <MarkerCore />
+
+首次输入延迟，首次输入延迟，用于记录用户首次与页面交互时响应的延迟，Google要求FID最好在100ms以内
+
+<div class="grid grid-cols-2 gap-x-4 pt-10">
+
+- **定义**
+  - `从用户首次与页面进行交互（单击链接、按钮、输入框等）到浏览器实际上能够响应该交互之间的时间`
+- **为什么是FID？**
+  - `使用者的第一次互动体验印象相当重要`
+  - `网页最大的互动性问题通常发生在一开始载入时`
+  - `页面载入后的二次延迟有其他专门的改善解决建议`
+- **怎样才算好？**
+  - <img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/eXyvkqRHQZ5iG38Axh1Z.svg"/>
+
+<div>
+
+  - **什么才是 first input ？**
+    - `只关注单次离散事件，如：clicks, taps, 和 key presses`
+    - `不关注连续事件，如：scrolling 和 zooming`
+
+  - **RAIL性能模型**
+    - <img filter="~ dark:invert" class="w-200" src="https://web-dev.imgix.net/image/admin/uc1IWVOW2wEhIY6z4KjJ.png">
+
+</div>
+
+</div>
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
 layout: center
 class: text-center
 ---
