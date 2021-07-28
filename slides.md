@@ -687,6 +687,41 @@ class: text-center
 </style>
 
 ---
+
+# RAIL性能模型
+
+Web 应用程序生命周期的四个不同方面：响应、动画、空闲和加载
+
+<div class="grid grid-cols-2 gap-x-4 pt-10">
+
+- **TL;DR ? 核心**
+  - `立即响应用户，要求在 100ms 内确认用户输入`
+  - `设置动画或滚动时，要求在 10ms 以内生成帧`
+  - `最大程度增加主线程的空闲时间`
+  - `持续吸引用户须在 1000ms 以内呈现交互内容`
+- **60fps 与设备刷新率**
+  - `屏幕刷新率为 60 次/秒，动画要平滑则每帧需要和屏幕刷新率保持一致。每帧预算 16.66ms，但实际上，浏览器有整理工作要做，因此所有工作需要在 10ms 内完成`
+
+<div>
+
+  - <img filter="~ dark:invert" src="https://web-dev.imgix.net/image/admin/I7HDZ9qGxe0jAzz6PxNq.png">
+
+  <div class="mt-10"></div>
+
+  - <img filter="~ dark:invert" src="https://developers.google.com/web/fundamentals/performance/rendering/images/intro/frame-full.jpg">
+
+</div>
+
+</div>
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
 layout: center
 class: text-center
 ---
