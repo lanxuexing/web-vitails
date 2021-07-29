@@ -694,21 +694,24 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
-- **TL;DR ? 核心**
-  - `立即响应用户，要求在 100ms 内确认用户输入`
-  - `设置动画或滚动时，要求在 10ms 以内生成帧`
-  - `最大程度增加主线程的空闲时间`
-  - `持续吸引用户须在 1000ms 以内呈现交互内容`
+- **RAIL 核心指标**
+  - `输入延迟时间（从点按到绘制）小于 100ms`
+  - `每个帧的工作（从JS到绘制）完成时间小于 16ms`
+  - `主线程JS工作分成不大于 50ms 的块`
+  - `页面可以在 1000ms 内就绪`
 - **60fps 与设备刷新率**
   - `屏幕刷新率为 60 次/秒，动画要平滑则每帧需要和屏幕刷新率保持一致。每帧预算 16.66ms，但实际上，浏览器有整理工作要做，因此所有工作需要在 10ms 内完成`
+  - `像素管道 JS/CSS > 样式 > 布局 > 绘制 > 合成`
 
 <div>
 
   - <img filter="~ dark:invert" src="https://web-dev.imgix.net/image/admin/I7HDZ9qGxe0jAzz6PxNq.png">
 
-  <div class="mt-10"></div>
+  <div class="mt-4"></div>
 
   - <img filter="~ dark:invert" src="https://developers.google.com/web/fundamentals/performance/rendering/images/intro/frame-full.jpg">
+
+  - `Google RAIL性能模型的目标，就是使用户满意，而不是让页面能运行的很快`
 
 </div>
 
@@ -718,6 +721,24 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 <style>
   strong {
     @apply text-green-500
+  }
+</style>
+
+---
+
+# 用户体验就是生产力 <Marker class="text-fuchsia-400">Tips</Marker>
+
+感知的响应度可能看起来不如有效性重要，但实际上恰好相反
+
+> 研究发现，一个交互系统的响应度，即能否跟上用户、及时告知当前状态，而不让他们无故等待，是决定用户满意度的最重要的因素。
+> 事件发生需要时间，而我们感知物体与事件也需要时间。但是让用户花在网站上的大多数时间不是等待加载，而是在使用时等待响应。
+
+<img filter="~ dark:invert" src="https://img.alicdn.com/tfs/TB1wi31eUT1gK0jSZFrXXcNCXXa-1730-706.png#alt=%E5%BB%B6%E8%BF%9F%E4%B8%8E%E7%94%A8%E6%88%B7%E5%8F%8D%E5%BA%94" />
+
+
+<style>
+  blockquote {
+    @apply text-green-500;
   }
 </style>
 
