@@ -726,7 +726,7 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 
 ---
 
-# 用户体验就是生产力 <Marker class="text-fuchsia-400">Tips</Marker>
+# 用户体验就是生产力
 
 感知的响应度可能看起来不如有效性重要，但实际上恰好相反
 
@@ -739,6 +739,41 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 <style>
   blockquote {
     @apply text-green-500;
+  }
+</style>
+
+---
+
+# 列表滚动时“停顿感” <Marker class="text-fuchsia-400">Tips</Marker>
+
+“滚动事件触发  -> 异步获取数据 -> 渲染”，页面响应用户操作，并渲染新内容可能需要花费大于 500ms 的时间
+
+<div class="grid grid-cols-2 gap-x-4 pt-10">
+
+- **预加载**
+  - `设置一定的阈值，在用户滚动到页面底部前获取数据，加载下一页的数据并渲染`
+  - `弱网环境或用户快速滚动时，底部的loading依然会经常性的触发`
+  - `网络状况等情况随时可能改变，导致边界难以确定，其次是必定会产生大量冗余的数据请求`
+- **无阻塞的滚动**
+  - `滚动时永远不打断用户操作，数据不足时根据滚动位置按需加载，先插入占位元素，等到数据获取时再渲染新的元素`
+
+
+<div>
+
+  - <img filter="~ dark:invert" src="https://img.alicdn.com/tfs/TB1pSwZeFT7gK0jSZFpXXaTkpXa-1122-405.png#alt=%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%97%A0%E5%B0%BD%E5%88%97%E8%A1%A8&width=800">
+
+  <div class="mt-10"></div>
+
+  - <img filter="~ dark:invert" src="https://img.alicdn.com/tfs/TB13JM4eQT2gK0jSZPcXXcKkpXa-1053-405.png#alt=%E6%97%A0%E9%98%BB%E5%A1%9E%E7%9A%84%E6%BB%9A%E5%8A%A8%E5%88%97%E8%A1%A8&width=800">
+
+</div>
+
+</div>
+
+
+<style>
+  strong {
+    @apply text-green-500
   }
 </style>
 
