@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",
-    "deploy": "slidev build --base=/web-vitails/",
+    "deploy": "slidev build --base=/web-vitails/ --out=docs && node copy.js",
     "export": "slidev export"
   },
   "dependencies": {
