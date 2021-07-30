@@ -1,5 +1,15 @@
 {
   "private": true,
+  "license": "MIT",
+  "description": "web-vitails 技术分享 PPT",
+  "author": {
+    "name": "lanxuexing",
+    "url": "https://lanxuexing.github.io/web-vitails/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lanxuexing/web-vitails.git"
+  },
   "scripts": {
     "dev": "slidev --open",
     "build": "slidev build",
