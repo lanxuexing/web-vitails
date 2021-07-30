@@ -638,7 +638,7 @@ class: text-center
 
 # Optimize Largest Contentful Paint（LCP）
 
-<Youtube id="AQqFZ5t8uNc?start=1073" width="800" height="450"/>
+<Youtube id="AQqFZ5t8uNc?start=1073" :width="800" :height="450"/>
 
 ---
 layout: center
@@ -709,7 +709,7 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 
   <div class="mt-4"></div>
 
-  - <img filter="~ dark:invert" src="https://developers.google.com/web/fundamentals/performance/rendering/images/intro/frame-full.jpg">
+  - <img filter="~ dark:invert" src="/frame-full.jpeg">
 
   - `Google RAIL性能模型的目标，就是使用户满意，而不是让页面能运行的很快`
 
