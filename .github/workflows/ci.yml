@@ -7,8 +7,6 @@ on:
   # 在main分支发生push事件时触发
   push:
     branches: [ main ]
-    paths:
-      - 'src/**'
   pull_request:
     branches: [ main ]
 
