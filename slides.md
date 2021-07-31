@@ -659,7 +659,7 @@ class: text-center
 
 - **定义**
   - `从用户首次与页面进行交互（单击链接、按钮、输入框等）到浏览器实际上能够响应该交互之间的时间`
-- **为什么是FID？**
+- **为什么只考虑 first input ？**
   - `使用者的第一次互动体验印象相当重要`
   - `网页最大的互动性问题通常发生在一开始载入时`
   - `页面载入后的二次延迟有其他专门的改善解决建议`
@@ -668,7 +668,7 @@ class: text-center
 
 <div>
 
-  - **什么才是 first input ？**
+  - **什么才算是 first input ？**
     - `只关注单次离散事件，如：clicks, taps, 和 key presses`
     - `不关注连续事件，如：scrolling 和 zooming`
 
@@ -774,6 +774,51 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 <style>
   strong {
     @apply text-green-500
+  }
+</style>
+
+
+---
+
+# 思考几个问题 ？
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **如果用户从不与网站互动怎么办？**
+  - `并非所有用户每次访问站点时都会与网站互动`
+  - `并非所有交互都与 FID 相关`
+  - `第一次交互发生在主线程 忙碌/空闲 时`
+  - `用户FID指标散乱（一直没有、很低、很高）`
+- **为什么只考虑输入延迟？**
+  - `FID 仅测量事件处理中的“延迟”。它不会测量事件处理时间本身，也不会测量浏览器在运行事件处理程序后更新 UI 所花费的时间`
+  <div class="mt-4"></div>
+    
+    - > 案例：setTimeout()、requestAnimationFrame()
+
+<div class="px-2 py-4">
+  <img filter="~ dark:invert" src="https://web-dev.imgix.net/image/admin/krOoeuQ4TWCbt9t6v5Wf.svg"/>
+
+  - **在 JavaScript 中如何测量 FID ？**
+
+  ```js
+  // 这里只是简单的使用了`PerformanceObserver`API 监听 `first-input`并将值打印到控制台，真实的指标远比这个复杂
+  new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      const delay = entry.processingStart - entry.startTime;
+      console.log('FID candidate:', delay, entry);
+    }
+  }).observe({type: 'first-input', buffered: true});
+  ```
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
   }
 </style>
 
