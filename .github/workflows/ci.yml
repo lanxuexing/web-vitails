@@ -4,7 +4,7 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # 在main分支发生push事件时触发
   push:
     branches: [ main ]
   pull_request:
@@ -13,7 +13,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# 设置环境变量
+env:
+  TZ: Asia/Shanghai # 时区（设置时区可使页面中的`最近更新时间`使用时区时间）
+
+# 开始工作流
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -31,6 +35,7 @@ jobs:
           npm install
           npm run deploy
 
+      # 更新Github-Pages网站
       - name: Update docs folder to repository
         run: |
           git config --global user.email "Action@GitHub.com"
@@ -39,14 +44,3 @@ jobs:
           cd docs && git add .
           git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
           git push --force
-          
-
-      # Runs a single command using the runners shell
-      # - name: Run a one-line script
-      #   run:  npm install && npm run deploy
-
-      # Runs a set of commands using the runners shell
-#       - name: Run a multi-line script
-#         run: |
-#           echo Add other actions to build,
-#           echo test, and deploy your project.
