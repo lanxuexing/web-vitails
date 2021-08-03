@@ -1018,6 +1018,53 @@ class: text-center
   }
 </style>
 
+
+---
+
+# 如何计算CLS？ <Marker class="text-violet-500">案例一</Marker>
+
+浏览器中两个渲染帧之间的视口大小和视口中不稳定元素的移动指标的乘积：影响分数 * 距离分数
+
+<div class="grid grid-cols-[2fr,1fr] gap-x-4">
+
+- **影响分数**
+
+  > 前一帧和当前帧的所有不稳定元素的可见区域的并集（部分）是当前帧的影响分数
+
+  `第一帧中占视口的一半，下一帧中，元素下移视口高度的25％。取并集则为总视口的75％，因此影响分数为 0.75`
+
+- **距离分数**
+
+  > 任何不稳定元素在框架中移动的最大距离除以视口的最大尺寸（宽高大为准）
+
+  `右图最大的视口尺寸是高度，并且不稳定元素移动了视口高度的25%，所以距离分数为0.25`
+
+- **CLS分数**
+
+  `最终CLS分数：0.75（影响） * 0.25（距离） = 0.1875`
+
+<div class="px-2 py-4">
+
+- <img filter="~ dark:invert" class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/BbpE9rFQbF8aU6iXN1U6.png">
+
+  <div class="mt-4"></div>
+
+- <img filter="~ dark:invert" class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/ASnfpVs2n9winu6mmzdk.png">
+
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500;
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
 ---
 name: Web-Vitails
 layout: center
