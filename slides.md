@@ -951,6 +951,22 @@ class: text-center
   }
 </style>
 
+
+---
+layout: center
+---
+
+# 以上优化，没有听懂？还有没其他优化点？
+
+---
+layout: center
+class: text-center
+---
+
+# Optimize First Input Delay（FID）
+
+<Youtube id="AQqFZ5t8uNc?start=2040" :width="800" :height="450"/>
+
 ---
 layout: center
 class: text-center
