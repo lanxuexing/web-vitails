@@ -653,7 +653,7 @@ class: text-center
 
 # FID (First Input Delay) <MarkerCore />
 
-首次输入延迟，首次输入延迟，用于记录用户首次与页面交互时响应的延迟，Google要求FID最好在100ms以内
+首次输入延迟，用于记录用户首次与页面交互时响应的延迟，Google要求FID最好在100ms以内
 
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
@@ -975,6 +975,48 @@ class: text-center
 # CLS (Cumulative Layout Shift)
 
 衡量视觉稳定性 **·** 累积布局偏移
+
+
+---
+
+# CLS (Cumulative Layout Shift) <MarkerCore />
+
+累积布局偏移，即CLS是衡量视觉稳定性的一个以用户为中心的重要指标，Google要求CLS得分为0.1或更低
+
+<div class="grid grid-cols-2 gap-x-4 pt-10">
+
+- **定义**
+  - `CLS是衡量页面整个生命周期内发生的每个意外布局偏移的最大布局偏移分数的度量`
+  > 计算方式在 2021.6.1 之后有新改动
+- **为什么只考虑 first input ？**
+  - `使用者的第一次互动体验印象相当重要`
+  - `网页最大的互动性问题通常发生在一开始载入时`
+  - `页面载入后的二次延迟有其他专门的改善解决建议`
+- **怎样才算好？**
+  - <img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/9mWVASbWDLzdBUpVcjE1.svg"/>
+
+<div>
+
+  - **什么才算是 first input ？**
+    - `只关注单次离散事件，如：clicks, taps, 和 key presses`
+    - `不关注连续事件，如：scrolling 和 zooming`
+
+  - **案例**
+    - <img filter="~ dark:invert" class="w-200" src="/cls-case.png">
+
+</div>
+
+</div>
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
 
 ---
 name: Web-Vitails
