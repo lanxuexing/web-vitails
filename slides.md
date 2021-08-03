@@ -872,7 +872,7 @@ class: text-center
 
 <div class="px-2 py-4">
 
-- <img filter="~ :dark:invert" class="w-100" src="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/images/image_13.png">
+- <img filter="~ :dark:invert" class="w-100" src="/async-defer.png">
 
 - 延迟加载资源
   ```html
