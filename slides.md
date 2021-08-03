@@ -894,6 +894,64 @@ class: text-center
 </style>
 
 ---
+
+# 最小化主线程工作 <Marker class="text-orange-400">技巧二</Marker>
+
+浏览器是多进程的（主、渲染、插件、GPU），浏览器内核是多线程的，js引擎是单线程的
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- requestAnimationFrame去抖动
+
+  > requestAnimationFrame最大的优势是由系统来决定回调函数的执行时机，具有CPU节能和函数节流的优势
+
+- 使用 Web Worker 在浏览器的主线程之外运行 JavaScript
+
+  ```js
+  const worker = new Worker("./worker.js");
+  // 通过 postMessage API 发送消息与 web worker 通信
+  worker.postMessage([40, 2]);
+  // 通过事件监听回调接受消息
+  worker.addEventListener("message", event => {
+    console.log(event.data);
+  });
+  ```
+
+- 避免大型、复杂的布局和布局抖动
+
+<div class="px-2 py-4">
+
+- 简化绘制的复杂度、减小绘制区域
+  ```scss
+  .moving-element {
+    will-change: transform; // 创建新的渲染层
+    transform: translateZ(0); // hack魔法，GPU加速
+  }
+  ```
+
+- 通过代码拆分减少 JavaScript 负载
+
+  ```js
+  form.addEventListener("submit", e => {
+    import('moduleA').then(module => module.default)
+      .then(someFunction()).catch(handleError());
+  });
+  const someFunction = () => { ... }
+  ```
+
+- 缩小样式计算的范围并降低其复杂性，关键 CSS
+
+</div>
+
+</div>
+
+<style>
+  ul li {
+    @apply text-green-500;
+  }
+</style>
+
+---
 layout: center
 class: text-center
 ---
