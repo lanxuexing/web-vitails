@@ -822,6 +822,77 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
   }
 </style>
 
+
+---
+layout: center
+class: text-center
+---
+
+# Optimize FID（First Input Delay）
+优化页面交互性
+
+---
+
+# 如何优化 FID <Marker class="text-purple-400">思考</Marker>
+
+- **减少第三方代码的影响**
+- **减少 JavaScript 执行时间**
+- **最小化主线程工作**
+- **保持较低的请求数量和较小的传输大小**
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+</style>
+
+---
+
+# 如何高效加载第三方脚本？ <Marker class="text-orange-400">技巧一</Marker>
+
+广告位、小部件、错误日志收集、监控或者集成一些第三方SDK等等，这些需要添加第三方脚本到HTML
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- async 或 defer 属性加载脚本以避免阻塞 DOM 解析
+  > async：浏览器在继续解析 HTML 文档的同时异步下载脚本。当脚本完成下载时，在脚本执行时会阻止解析
+
+  <br>
+
+  > defer：浏览器在继续解析 HTML 文档的同时异步下载脚本。在解析完成之前，脚本不会运行
+
+- 减少资源建立连接的时间
+
+  ```html
+  <!-- DNS预解析 -->
+  <link rel="dns-prefetch" href="http://example.com">
+  <!-- 一个连接，一般需要经过DNS查找，TCP三次握手和TLS协商 -->
+  <link rel="preconnect" href="https://cdn.example.com">
+  ```
+
+<div class="px-2 py-4">
+
+- <img filter="~ :dark:invert" class="w-100" src="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/images/image_13.png">
+
+- 延迟加载资源
+  ```html
+  <script src="lazysizes.min.js" async=""></script>
+  <!-- 使用 Intersection Observer 进行高效的延迟加载 -->
+  <script>
+    new IntersectionObserver(callback, options)
+  </script>
+  ```
+
+</div>
+
+</div>
+
+<style>
+  ul li {
+    @apply text-green-500;
+  }
+</style>
+
 ---
 layout: center
 class: text-center
