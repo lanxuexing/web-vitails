@@ -1094,7 +1094,51 @@ class: text-center
 
 - **向现有元素添加内容如何影响布局移位分数**
 
-- <img filter="~ dark:invert" class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/xhN81DazXCs8ZawoCj0T.png?auto=format&w=1600">
+- <img filter="~ dark:invert" class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/xhN81DazXCs8ZawoCj0T.png">
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500;
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+
+---
+
+# 如何计算CLS？ <Marker class="text-violet-500">案例三</Marker>
+
+浏览器中两个渲染帧之间的视口大小和视口中不稳定元素的移动指标的乘积：影响分数 * 距离分数
+
+<div class="grid grid-cols-[2fr,1fr] gap-x-4">
+
+- **影响分数**
+
+  > 前一帧和当前帧的所有不稳定元素的可见区域的并集（部分）是当前帧的影响分数
+
+  `旧item位置发生偏移，新item起始位置不变，前后位置取并集（虚线框部分大约占视口的 38%），因此影响分数为 0.38`
+
+- **距离分数**
+
+  > 任何不稳定元素在框架中移动的最大距离除以视口的最大尺寸（宽高大为准）
+
+  `箭头表示不稳定元素从起始位置移动的距离。Zebra元素移动最多，大约移动了视口高度的 30%，所以距离分数是 0.3`
+
+- **CLS分数**
+
+  `最终CLS分数：0.38（影响） * 0.3（距离） = 0.1172`
+
+<div class="px-2">
+
+- **多个不稳定元素**
+
+- <img filter="~ dark:invert" class="w-60" src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/FdCETo2dLwGmzw0V5lNT.png">
 
 </div>
 
