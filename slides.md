@@ -238,7 +238,7 @@ class: text-center
 
 # LCP (Largest Contentful Paint) <MarkerCore />
 
-最大内容绘制时间，用来衡量加载体验，Google要求LCP最好在页面首次开始加载后的2.5秒内发生
+最大内容绘制时间。测量加载性能，为了能提供较好的用户体验，LCP指标建议页面首次加载要在2.5s内完成
 
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
@@ -433,16 +433,16 @@ class: text-center
 
 ### 优化 LCP 的建议
 
-<v-clicks at="1">
+<div>
 
 - 服务器响应速度慢
 - JavaScript 和 CSS 阻塞渲染
 - 资源加载时间
 - 客户端渲染
 
-</v-clicks>
+</div>
 
-<v-clicks at="5">
+<div>
 
 - 应用 PRPL 即时加载
 - 优化关键渲染路径
@@ -453,7 +453,7 @@ class: text-center
 - 使用 Gzip 和 Brotli 压缩页面资源，降低传输时间
 - 使用 service worker 缓存资源
 
-</v-clicks>
+</div>
 
 </div>
 
@@ -474,31 +474,29 @@ clicks: 2
 npm install --save-dev optimize-css-assets-webpack-plugin
 ```
 
-```html {all|7|all}
-<!-- 使用媒体查询优化 CSS 背景图像 -->
-<style>
-  body {
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat; background-size: cover;
-    background-image: url(images/background-desktop.jpg); // 这一行可以使用 `@media` 来适配不同屏幕
-  }
-  // 手机
-  @media (max-width: 480px) {
-    body { background-image: url(images/background-mobile.jpg); }
-  }
-  // 平板
-  @media (min-width: 481px) and (max-width: 1024px) {
-    body { background-image: url(images/background-tablet.jpg); }
-  }
-  // PC
-  @media (min-width: 1025px) {
-    body { background-image: url(images/background-desktop.jpg); }
-  }
-</style>
+```scss {all|6|all}
+// 使用媒体查询优化 CSS 背景图像
+body {
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat; background-size: cover;
+  background-image: url(images/background-desktop.jpg); // 这一行可以使用 `@media` 来适配不同屏幕
+}
+// 手机
+@media (max-width: 480px) {
+  body { background-image: url(images/background-mobile.jpg); }
+}
+// 平板
+@media (min-width: 481px) and (max-width: 1024px) {
+  body { background-image: url(images/background-tablet.jpg); }
+}
+// PC
+@media (min-width: 1025px) {
+  body { background-image: url(images/background-desktop.jpg); }
+}
 ```
 
-<arrow v-click="1" v-show="2" x1="400" y1="420" x2="230" y2="300" color="#564" width="3" arrowSize="1" />
+<arrow v-click="1" v-show="2" x1="400" y1="420" x2="230" y2="280" color="#564" width="3" arrowSize="1" />
 
 ---
 
@@ -519,8 +517,6 @@ npm install --save-dev optimize-css-assets-webpack-plugin
 </head>
 ```
 
-<v-click>
-
 <div class="mt-4"></div>
 
 - 提取、压缩、内联首屏CSS
@@ -531,17 +527,11 @@ npm i --save-dev html-critical-webpack-plugin  // webpack plugin
 npm install criticalcss // 支持 `cli`，对 `@font-face` 支持更友好和精确
 ```
 
-</v-click>
-
-<v-click>
-
 - 站点或应用程序具有大量动态注入 DOM 的样式（**内部使用puppeteer**）
 
 ```ts
 npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默认是 `extractCss` 为 true (提取到独立的文件中，方便缓存)
 ```
-
-</v-click>
 
 <style>
   strong {
@@ -653,7 +643,7 @@ class: text-center
 
 # FID (First Input Delay) <MarkerCore />
 
-首次输入延迟，用于记录用户首次与页面交互时响应的延迟，Google要求FID最好在100ms以内
+首次输入延迟。测量交互性能，为了提供较好用户体验，交互时间建议在100ms或以内
 
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
@@ -981,9 +971,9 @@ class: text-center
 
 # CLS (Cumulative Layout Shift) <MarkerCore />
 
-累积布局偏移，即CLS是衡量视觉稳定性的一个以用户为中心的重要指标，Google要求CLS得分为0.1或更低
+累积布局偏移。测量视觉稳定性，为了提供较好用户体验，页面应该维持CLS在0.1或以内
 
-<div class="grid grid-cols-2 gap-x-4 pt-10">
+<div class="grid grid-cols-[2fr,1fr] gap-x-4">
 
 - **定义**
   - `CLS是衡量页面整个生命周期内发生的每个意外布局偏移的最大布局偏移分数的度量`
@@ -998,11 +988,13 @@ class: text-center
 <div>
 
   - **什么才算是 first input ？**
-    - `只关注单次离散事件，如：clicks, taps, 和 key presses`
-    - `不关注连续事件，如：scrolling 和 zooming`
+    - <video filter="~ dark:invert" class="w-screenshot w-60" autoplay loop muted playsinline>
+        <source src="https://storage.googleapis.com/web-dev-assets/better-layout-shift-metric/session-window.webm" type="video/webm">
+        <source src="https://storage.googleapis.com/web-dev-assets/better-layout-shift-metric/session-window.mp4" type="video/mp4">
+      </video>
 
   - **案例**
-    - <img filter="~ dark:invert" class="w-200" src="/cls-case.png">
+    - <img filter="~ dark:invert" class="w-60" src="/cls-case.png">
 
 </div>
 
