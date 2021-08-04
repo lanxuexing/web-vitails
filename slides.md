@@ -259,7 +259,7 @@ class: text-center
     - `通过 url() 函数加载背景图片的元素`
     - `包含文本节点或其他内联文本元素子级的块级元素`
 
-  - **就这？**
+  - **不断发展的LCP指标**
     - `显然不止于此，这些元素只是目前LCP分数考虑的元素类型，之后随着研究的深入，会陆续进行更新`
 
 </div>
@@ -429,29 +429,29 @@ class: text-center
 
 <div class="grid grid-cols-2 gap-x-4 gap-y-4">
 
-### 影响 LCP 的因素
+### LCP 可能被这四个因素影响
 
 ### 优化 LCP 的建议
 
 <div>
 
-- 服务器响应速度慢
-- JavaScript 和 CSS 阻塞渲染
-- 资源加载时间
-- 客户端渲染
+- **服务端响应时间**
+- **Javascript 和 CSS 引起的渲染卡顿**
+- **资源加载时间**
+- **客户端渲染**
 
 </div>
 
 <div>
 
-- 应用 PRPL 即时加载
-- 优化关键渲染路径
-- 优化 CSS
-- 优化 Image
-- 优化 Web Font
-- 优化 JavaScript
-- 使用 Gzip 和 Brotli 压缩页面资源，降低传输时间
-- 使用 service worker 缓存资源
+- **应用 PRPL 即时加载**
+- **优化关键渲染路径**
+- **优化 CSS**
+- **优化 Image**
+- **优化 Web Font**
+- **优化 JavaScript**
+- **使用 Gzip 和 Brotli 压缩文件资源，降低传输时间**
+- **使用 service worker 缓存资源**
 
 </div>
 
@@ -459,7 +459,10 @@ class: text-center
 
 <style>
   h3 {
-    @apply text-green-500 !opacity-100
+    @apply text-amber-500 !opacity-100;
+  }
+  strong {
+    @apply text-green-500;
   }
 </style>
 
@@ -519,7 +522,7 @@ body {
 
 <div class="mt-4"></div>
 
-- 提取、压缩、内联首屏CSS
+- **提取、压缩、内联首屏CSS**
 
 ```ts
 npm i -D critical // 自动检测，可配置，从html中提取critical css，并将critical-path内联到html中
@@ -527,7 +530,7 @@ npm i --save-dev html-critical-webpack-plugin  // webpack plugin
 npm install criticalcss // 支持 `cli`，对 `@font-face` 支持更友好和精确
 ```
 
-- 站点或应用程序具有大量动态注入 DOM 的样式（**内部使用puppeteer**）
+- **站点或应用程序具有大量动态注入 DOM 的样式（内部使用puppeteer）**
 
 ```ts
 npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默认是 `extractCss` 为 true (提取到独立的文件中，方便缓存)
@@ -543,7 +546,7 @@ npm i -D penthouse // 关键路径css生成器，`Angular Build Prod` 选项默�
 
 # Optimize Images <Marker class="text-orange-400">技巧一</Marker>
 
-- 图片压缩
+- **图片压缩**
 
 ```sh
 // 使用Imagemin压缩图片，支持 `cli` 和 `npm`
@@ -554,7 +557,7 @@ $ npm i imagemin-webpack-plugin -D // webpack plugin
 
 <div class="mt-4"></div>
 
-- 选择合适的图片格式
+- **选择合适的图片格式**
 
  图片格式 | 透明度 | 动画 | 浏览器支持
  ---|---|---|---
@@ -568,10 +571,10 @@ $ npm i imagemin-webpack-plugin -D // webpack plugin
 
 <div class="mt-4"></div>
 
-- 使用CDN
+- **使用CDN**
 
 <style>
-  ul li {
+  strong {
     @apply text-green-500;
   }
 </style>
@@ -581,7 +584,7 @@ $ npm i imagemin-webpack-plugin -D // webpack plugin
 
 # Optimize Images <Marker class="text-orange-400">技巧二</Marker>
 
-- 用视频替换 GIF 动画以加快页面加载速度
+- **用视频替换 GIF 动画以加快页面加载速度**
 
 ```ts
 // 使用 FFmpeg 将 GIF 转换为 MP4 视频
@@ -599,7 +602,7 @@ ffmpeg -i my-animation.gif -c vp9 -b:v 0 -crf 41 my-animation.webm
 
 <div class="mt-4"></div>
 
-- 选择合适的图像尺寸
+- **选择合适的图像尺寸**
 
 ```ts
 // 使用 ImageMagick 调整图像大小（具有创建、编辑、合成和转换功能，支持200+图像格式）
@@ -610,7 +613,7 @@ convert flower.jpg -resize 200x100 flower_small.jpg // 缩放图像以适应 “
 ```
 
 <style>
-  ul li {
+  strong {
     @apply text-green-500;
   }
 </style>
@@ -785,7 +788,7 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
     
     - > 案例：setTimeout()、requestAnimationFrame()
 
-<div class="px-2 py-4">
+<div class="px-2">
   <img filter="~ dark:invert" src="https://web-dev.imgix.net/image/admin/krOoeuQ4TWCbt9t6v5Wf.svg"/>
 
   - **在 JavaScript 中如何测量 FID ？**
@@ -823,16 +826,25 @@ class: text-center
 
 ---
 
-# 如何优化 FID <Marker class="text-purple-400">思考</Marker>
+# 如何优化 FID ? <Marker class="text-purple-400">思考</Marker>
+
+<div class=""></div>
+
+> FID可能被这四个因素影响
+
+<div class="mt-4"></div>
 
 - **减少第三方代码的影响**
-- **减少 JavaScript 执行时间**
+- **减少 JavaScript 的执行时间**
 - **最小化主线程工作**
-- **保持较低的请求数量和较小的传输大小**
+- **减小请求数量和请求文件大小**
 
 <style>
   strong {
     @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
   }
 </style>
 
@@ -909,7 +921,7 @@ class: text-center
 
 - 避免大型、复杂的布局和布局抖动
 
-<div class="px-2 py-4">
+<div class="px-2">
 
 - 简化绘制的复杂度、减小绘制区域
   ```scss
