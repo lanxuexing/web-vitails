@@ -1153,6 +1153,36 @@ class: text-center
   }
 </style>
 
+
+---
+
+# 在 JavaScript 中如何测量 CLS ?
+
+```js
+let clsValue = 0,clsEntries = [], sessionValue = 0, sessionEntries = [];
+new PerformanceObserver((entryList) => {
+  for (const entry of entryList.getEntries()) {
+    // 只计算没有最近用户输入的布局变化
+    if (!entry.hadRecentInput) {
+      const firstSessionEntry = sessionEntries[0];
+      const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+      // 如果输入发生在上一次输入之后不到 1 秒，并且在会话中的第一个条目之后不到 5 秒（包括当前会话中的条目）；否则，开始一个新的会话。
+      if (sessionValue && entry.startTime - lastSessionEntry.startTime < 1000 && entry.startTime - firstSessionEntry.startTime < 5000) {
+        sessionValue += entry.value;  sessionEntries.push(entry);
+      } else {
+        sessionValue = entry.value;   sessionEntries = [entry];
+      }
+      // 如果当前会话值大于当前 CLS 值， 更新 CLS 和对其有贡献的 entries
+      if (sessionValue > clsValue) {
+        clsValue = sessionValue;      clsEntries = sessionEntries;
+        // 将更新的值（及其entries）记录到控制台
+        console.log('CLS:', clsValue, clsEntries)
+      }
+    }
+  }
+}).observe({type: 'layout-shift', buffered: true});
+```
+
 ---
 name: Web-Vitails
 layout: center
