@@ -653,15 +653,13 @@ class: text-center
 - **定义**
   - `从用户首次与页面进行交互（单击链接、按钮、输入框等）到浏览器实际上能够响应该交互之间的时间`
 - **为什么只考虑 first input ？**
-  - `使用者的第一次互动体验印象相当重要`
-  - `网页最大的互动性问题通常发生在一开始载入时`
-  - `页面载入后的二次延迟有其他专门的改善解决建议`
-- **怎样才算好？**
+  - `第一次输入延迟是用户对网站形成的第一个印象，网站是否有质量且可靠（网站加载后以多快的速度对用户进行响应）；web中最大的交互问题第一次加载之后`
+- **什么样的指标才是好的？**
   - <img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/eXyvkqRHQZ5iG38Axh1Z.svg"/>
 
 <div>
 
-  - **什么才算是 first input ？**
+  - **哪些事件输入属于 first input ？**
     - `只关注单次离散事件，如：clicks, taps, 和 key presses`
     - `不关注连续事件，如：scrolling 和 zooming`
 
@@ -679,6 +677,10 @@ class: text-center
   }
 </style>
 
+<!-- 
+对于网站应该如何解决较高的首次输入延迟（例如代码分割、减少JavaScript的预加载）的建议解决方案（TTI是指衡量这一块），不一定与在页面加载后解决输入延迟（FID是指衡量这一块）的解决方案相同。所以FID是在TTI的基础上更精确的细分。
+ -->
+
 ---
 
 # RAIL性能模型
@@ -689,12 +691,12 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 
 - **RAIL 核心指标**
   - `输入延迟时间（从点按到绘制）小于 100ms`
-  - `每个帧的工作（从JS到绘制）完成时间小于 16ms`
+  - `每帧的工作（从JS到绘制）完成时间小于 16ms`
   - `主线程JS工作分成不大于 50ms 的块`
   - `页面可以在 1000ms 内就绪`
 - **60fps 与设备刷新率**
-  - `屏幕刷新率为 60 次/秒，动画要平滑则每帧需要和屏幕刷新率保持一致。每帧预算 16.66ms，但实际上，浏览器有整理工作要做，因此所有工作需要在 10ms 内完成`
-  - `像素管道 JS/CSS > 样式 > 布局 > 绘制 > 合成`
+  - `屏幕刷新率为 60 次/秒，动画要平滑则每帧需要和屏幕刷新率保持一致，也就是每帧预算 16.66ms，但实际上，浏览器有整理工作要做，因此所有工作需要在 10ms 内完成`
+  - `像素管道JS/CSS > 样式 > 布局 > 绘制 > 合成`
 
 <div>
 
@@ -726,12 +728,20 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 > 研究发现，一个交互系统的响应度，即能否跟上用户、及时告知当前状态，而不让他们无故等待，是决定用户满意度的最重要的因素。
 > 事件发生需要时间，而我们感知物体与事件也需要时间。但是让用户花在网站上的大多数时间不是等待加载，而是在使用时等待响应。
 
-<img filter="~ dark:invert" src="https://img.alicdn.com/tfs/TB1wi31eUT1gK0jSZFrXXcNCXXa-1730-706.png#alt=%E5%BB%B6%E8%BF%9F%E4%B8%8E%E7%94%A8%E6%88%B7%E5%8F%8D%E5%BA%94" />
+<br>
+
+<img filter="~ dark:invert" class="w-190" src="https://img.alicdn.com/tfs/TB1wi31eUT1gK0jSZFrXXcNCXXa-1730-706.png#alt=%E5%BB%B6%E8%BF%9F%E4%B8%8E%E7%94%A8%E6%88%B7%E5%8F%8D%E5%BA%94" />
 
 
 <style>
   blockquote {
     @apply text-green-500;
+  }
+  img {
+    clip-path: inset(5px 4px 5px 4px);
+  }
+  blockquote {
+    @apply text-amber-500;
   }
 </style>
 
@@ -778,30 +788,25 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 <div class="grid grid-cols-2 gap-x-4">
 
 - **如果用户从不与网站互动怎么办？**
-  - `并非所有用户每次访问站点时都会与网站互动`
-  - `并非所有交互都与 FID 相关`
-  - `第一次交互发生在主线程 忙碌/空闲 时`
-  - `用户FID指标散乱（一直没有、很低、很高）`
-- **为什么只考虑输入延迟？**
-  - `FID 仅测量事件处理中的“延迟”。它不会测量事件处理时间本身，也不会测量浏览器在运行事件处理程序后更新 UI 所花费的时间`
-  <div class="mt-4"></div>
-    
-    - > 案例：setTimeout()、requestAnimationFrame()
+  - `首先并非所有用户每次访问站点时都会与网站互动`
+  - `右图是用户刚好在主线程最繁忙的时刻进行交互，但是如果用户在主线程空闲的时候交互，那么浏览器可以立刻响应，所以FID的值需要重点查看它的分布情况`
 
-<div class="px-2">
-  <img filter="~ dark:invert" src="https://web-dev.imgix.net/image/admin/krOoeuQ4TWCbt9t6v5Wf.svg"/>
+- **为什么FID只包含从用户输入到主线程开始相应的时间？而没有包含事件处理到浏览器绘制UI的时间？**
 
-  - **在 JavaScript 中如何测量 FID ？**
+  > 尽管主线程处理和绘制的这段时间也很重要，但是如果FID把这段时间也包含进来，则有的开发者可能会使用一些异步API（例如：setTimeout、requestAnimationFrame）来把这个 task 拆分到下一帧，以较少FID的时间，这样不仅没有提高用户体验，反而使用户体验降低。
 
-  ```js
-  // 这里只是简单的使用了`PerformanceObserver`API 监听 `first-input`并将值打印到控制台，真实的指标远比这个复杂
-  new PerformanceObserver((entryList) => {
-    for (const entry of entryList.getEntries()) {
-      const delay = entry.processingStart - entry.startTime;
-      console.log('FID candidate:', delay, entry);
-    }
-  }).observe({type: 'first-input', buffered: true});
-  ```
+  > FID实际上测量的是输入事件被感知到到主线程空闲的这段时间
+
+<div class="px-2 py-4">
+
+  - **可以通过下图来更详细了解 FID 处于哪个位置**
+
+    <img filter="~ dark:invert" src="https://web-dev.imgix.net/image/admin/krOoeuQ4TWCbt9t6v5Wf.svg"/>
+
+  - **哪些HTML元素在交互响应之前等待主线程上正在执行的任务完成？**
+    - `输入框，例如<input>、<textarea>、<radio>、<checkbox>`
+    - `下拉框，例如<select> 和 链接，例如<a>`
+  
 </div>
 
 </div>
@@ -815,6 +820,64 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
   }
 </style>
 
+<!-- 
+对于网站应该如何解决较高的首次输入延迟（例如代码分割、减少JavaScript的预加载）的建议解决方案（TTI是指衡量这一块），不一定与在页面加载后解决输入延迟（FID是指衡量这一块）的解决方案相同。所以FID是在TTI的基础上更精确的细分。
+
+即使没有输入事件被注册，FID也可以测量。因为用户的输入相应并不一定需要事件被执行，但一定需要主线程是空闲的。例如，下面这些HTML元素都需要在交互响应之前等待主线程上的正在执行的任务完成：1. 输入框，例如<input>、<textarea>、<radio>、<checkbox> 2. 下拉框，例如<select> 3. 链接，例如<a>
+ -->
+
+---
+
+# 如何测量 FID ？
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **线上测量工具**
+  - `Chrome User Experience Report`
+  - `PageSpeed Insights`
+  - `Search Console (Core Web Vitals report)`
+  - `web-vitals JavaScript library`
+
+- **web-vitals JavaScript library**
+
+  ```js
+  import { getFID } from 'web-vitals';
+
+  // 一旦可用，立即测量并记录 FID
+  getFID(console.log);
+  ```
+
+<div class="px-2 py-4">
+
+  - **在 JavaScript 中测量 FID**
+
+  ```js
+  // 使用`PerformanceObserver`API 监听 `first-input`
+  // 并将值打印到控制台，真实指标测量比这个复杂
+  new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      const delay = entry.processingStart - entry.startTime;
+      console.log('FID candidate:', delay, entry);
+    }
+  }).observe({type: 'first-input', buffered: true});
+  ```
+
+  - **浏览器中的 PerformanceObserver 结果**
+
+  <img src="/console-fid.png">
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
 
 ---
 layout: center
@@ -852,18 +915,18 @@ class: text-center
 
 # 如何高效加载第三方脚本？ <Marker class="text-orange-400">技巧一</Marker>
 
-广告位、小部件、错误日志收集、监控或者集成一些第三方SDK等等，这些需要添加第三方脚本到HTML
+第三方广告或小图标、错误日志收集、监控或者集成一些第三方SDK等等，这些需要添加第三方脚本到HTML
 
 <div class="grid grid-cols-2 gap-x-4">
 
-- async 或 defer 属性加载脚本以避免阻塞 DOM 解析
+- **async 或 defer 属性加载脚本以避免阻塞 DOM 解析**
   > async：浏览器在继续解析 HTML 文档的同时异步下载脚本。当脚本完成下载时，在脚本执行时会阻止解析
 
   <br>
 
   > defer：浏览器在继续解析 HTML 文档的同时异步下载脚本。在解析完成之前，脚本不会运行
 
-- 减少资源建立连接的时间
+- **减少资源建立连接的时间**
 
   ```html
   <!-- DNS预解析 -->
@@ -876,7 +939,7 @@ class: text-center
 
 - <img filter="~ :dark:invert" class="w-100" src="/async-defer.png">
 
-- 延迟加载资源
+- **延迟加载具有lazysizes的屏幕外图像**
   ```html
   <script src="lazysizes.min.js" async=""></script>
   <!-- 使用 Intersection Observer 进行高效的延迟加载 -->
@@ -890,24 +953,27 @@ class: text-center
 </div>
 
 <style>
-  ul li {
+  strong {
     @apply text-green-500;
+  }
+  blockquote {
+    @apply text-amber-500;
   }
 </style>
 
 ---
 
-# 最小化主线程工作 <Marker class="text-orange-400">技巧二</Marker>
+# 最小化主线程（main-thread）工作 <Marker class="text-orange-400">技巧二</Marker>
 
 浏览器是多进程的（主、渲染、插件、GPU），浏览器内核是多线程的，js引擎是单线程的
 
 <div class="grid grid-cols-2 gap-x-4">
 
-- requestAnimationFrame去抖动
+- **requestAnimationFrame去抖动**
 
   > requestAnimationFrame最大的优势是由系统来决定回调函数的执行时机，具有CPU节能和函数节流的优势
 
-- 使用 Web Worker 在浏览器的主线程之外运行 JavaScript
+- **使用 Web Worker 在浏览器的主线程之外运行 JavaScript**
 
   ```js
   const worker = new Worker("./worker.js");
@@ -919,11 +985,11 @@ class: text-center
   });
   ```
 
-- 避免大型、复杂的布局和布局抖动
+- **避免大型、复杂的布局和布局抖动**
 
 <div class="px-2">
 
-- 简化绘制的复杂度、减小绘制区域
+- **简化paint复杂性并减少paint面积**
   ```scss
   .moving-element {
     will-change: transform; // 创建新的渲染层
@@ -931,7 +997,7 @@ class: text-center
   }
   ```
 
-- 通过代码拆分减少 JavaScript 负载
+- **代码拆分减少JavaScript负载，删除未使用的代码**
 
   ```js
   form.addEventListener("submit", e => {
@@ -941,15 +1007,18 @@ class: text-center
   const someFunction = () => { ... }
   ```
 
-- 缩小样式计算的范围并降低其复杂性，关键 CSS
+- **减少样式计算的范围和复杂性，提取关键CSS**
 
 </div>
 
 </div>
 
 <style>
-  ul li {
+  strong {
     @apply text-green-500;
+  }
+  blockquote {
+    @apply text-amber-500;
   }
 </style>
 
@@ -1031,17 +1100,17 @@ class: text-center
 
 <div class="grid grid-cols-[2fr,1fr] gap-x-4">
 
-- **影响分数**
+- **影响分数（impact fraction）**
 
   > 前一帧和当前帧的所有不稳定元素的可见区域的并集（部分）是当前帧的影响分数
 
-  `第一渲染帧占视口的一半，下一渲染帧元素下移视口高度的 25％。取并集则为总视口的75％，因此影响分数为 0.75`
+  `左边是当前帧的元素，下一帧中，元素下移了可视区域内 25% 的高度。虚线框为两桢中当前元素的并集，占适口的 75%，因此影响分数为 0.75`
 
-- **距离分数**
+- **距离分数（distance fraction）**
 
   > 任何不稳定元素在框架中移动的最大距离除以视口的最大尺寸（宽或高，取较大的）
 
-  `右图最大的视口尺寸是高度，并且不稳定元素移动了视口高度的 25%，所以距离分数为 0.25`
+  `右图最大的视口尺寸是高度，并且不稳定元素相对适口移动了 25% 的距离，所以距离分数为 0.25`
 
 - **CLS分数**
 
@@ -1069,6 +1138,9 @@ class: text-center
   }
 </style>
 
+<!-- 
+并不是所有的布局移动都是不好的，很多web网站都会改变元素的开始位置。只有当布局移动是非用户预期的，才是不好的
+ -->
 
 ---
 
@@ -1078,13 +1150,13 @@ class: text-center
 
 <div class="grid grid-cols-[2fr,1fr] gap-x-4">
 
-- **影响分数**
+- **影响分数（impact fraction）**
 
   > 前一帧和当前帧的所有不稳定元素的可见区域的并集（部分）是当前帧的影响分数
 
   `上半块起始位置不变为稳定，下半块位置发生变化（不可见区域并不会被考虑在内），前后位置取并集（前后一样），因此影响分数为 0.5`
 
-- **距离分数**
+- **距离分数（distance fraction）**
 
   > 任何不稳定元素在框架中移动的最大距离除以视口的最大尺寸（宽高大为准）
 
@@ -1122,13 +1194,13 @@ class: text-center
 
 <div class="grid grid-cols-[2fr,1fr] gap-x-4">
 
-- **影响分数**
+- **影响分数（impact fraction）**
 
   > 前一帧和当前帧的所有不稳定元素的可见区域的并集（部分）是当前帧的影响分数
 
   `旧item位置发生偏移，新item起始位置不变，前后位置取并集（虚线框部分大约占视口的 38%），因此影响分数为 0.38`
 
-- **距离分数**
+- **距离分数（distance fraction）**
 
   > 任何不稳定元素在框架中移动的最大距离除以视口的最大尺寸（宽高大为准）
 
@@ -1151,6 +1223,51 @@ class: text-center
 <style>
   strong {
     @apply text-green-500;
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+---
+
+# 如何测量 CLS ?
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **线上测量工具**
+  - `Chrome User Experience Report`
+  - `PageSpeed Insights`
+  - `Search Console (Core Web Vitals report)`
+  - `web-vitals JavaScript library`
+
+- **web-vitals JavaScript library**
+
+  ```js
+  import { getCLS } from 'web-vitals';
+
+  // 在所有需要报告的地方测量和记录 CLS
+  getCLS(console.log);
+  ```
+
+<div class="px-2 py-4">
+
+  - **实验室工具**
+    - `Chrome DevTools`
+    - `Lighthouse`
+    - `WebPageTest`
+
+  - **浏览器中的 PerformanceObserver 结果**
+
+  <img src="/console-cls.png">
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
   }
   blockquote {
     @apply text-amber-500;
@@ -1186,6 +1303,55 @@ new PerformanceObserver((entryList) => {
   }
 }).observe({type: 'layout-shift', buffered: true});
 ```
+
+
+---
+layout: center
+class: text-center
+---
+
+# Optimize CLS（Cumulative Layout Shift）
+优化视觉稳定性
+
+
+---
+
+# 如何优化 CLS ? <Marker class="text-purple-400">思考</Marker>
+
+<div class=""></div>
+
+> 我们可以根据这些原则来避免非预期布局移动
+
+<div class="mt-4"></div>
+
+- **图片或视频元素有应始终设置大小属性（或者设置宽高比例），或者给他们保留一个空间大小，设置width、height，或者使用unsized-media feature policy**
+- **不要在一个已存在的元素上面插入内容（除了响应用户输入）**
+- **使用 animation 或 transition 等过渡动画，而不是直接触发布局改变**
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+
+---
+layout: center
+---
+
+# 以上优化，没有听懂？还有没其他优化点？
+
+---
+layout: center
+class: text-center
+---
+
+# Optimize Cumulative Layout Shift（CLS）
+
+<Youtube id="AQqFZ5t8uNc?start=85" :width="800" :height="450"/>
 
 ---
 name: Web-Vitails
