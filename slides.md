@@ -30,6 +30,12 @@ title: Web Vitals
 
 <img filter="~ dark:invert" class="pt-10 w-100 m-auto" src="https://lh6.googleusercontent.com/i9iF8GqgQhXkh1MLRlGQjYRxy_WzXNWTOTvBl5b-HCiL8HTgCk-Qh7PINQ1ruv-q5qUiRNhlpzKMybGzO_nYiTVOxIJoFBxBLRMIPCbI4AIcKLmcMhmh08JWQpCtpJq-hltKhiFi" />
 
+<style>
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
 ---
 
 # 如何准确衡量网站的性能 <Marker class="text-purple-400">思考</Marker>
@@ -243,11 +249,11 @@ class: text-center
 <div class="grid grid-cols-2 gap-x-4 pt-10">
 
 - **定义**
-  - `视口内可见的最大图像或文本块的渲染时间，相对于页面首次开始加载的时间`
+  - `页面开始加载到最大文本块内容或图片显示在页面中的时间`
 - **为什么是LCP？**
   - `Load、DOMContentLoaded 指标不友好，例如Skeleton骨架屏、Loading加载器`
   - `FMP、SI指标复杂，有的时候甚至是错的`
-- **怎样才算好？**
+- **什么样的指标才是好的？**
   - <img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/elqsdYqQEefWJbUM2qMO.svg"/>
 
 <div>
@@ -324,6 +330,9 @@ class: text-center
   h3 {
     @apply text-green-500 !opacity-100
   }
+  blockquote {
+    @apply text-amber-500;
+  }
 </style>
 
 ---
@@ -357,6 +366,52 @@ class: text-center
 <style>
   h3 {
     @apply text-amber-500 !opacity-100
+  }
+</style>
+
+
+---
+
+# 如何测量 LCP ？
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **线上测量工具**
+  - `Chrome User Experience Report`
+  - `PageSpeed Insights`
+  - `Search Console (Core Web Vitals report)`
+  - `web-vitals JavaScript library`
+
+- **web-vitals JavaScript library**
+
+  ```js
+  import { getLCP } from 'web-vitals';
+
+  // 一旦 LCP 可用，立即测量并记录它
+  getLCP(console.log);
+  ```
+
+<div class="px-2">
+
+  - **实验室工具**
+    - `Chrome DevTools`
+    - `Lighthouse`
+    - `WebPageTest`
+
+  - **浏览器中的 PerformanceObserver 结果**
+
+  <img filter="~ :dark:invert" src="/console-lcp.png">
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
   }
 </style>
 
@@ -571,7 +626,7 @@ $ npm i imagemin-webpack-plugin -D // webpack plugin
 
 <div class="mt-4"></div>
 
-- **使用CDN**
+- **使用CDN加速资源**
 
 <style>
   strong {
@@ -864,7 +919,7 @@ Web 应用程序生命周期的四个不同方面：响应、动画、空闲和�
 
   - **浏览器中的 PerformanceObserver 结果**
 
-  <img src="/console-fid.png">
+  <img filter="~ :dark:invert" src="/console-fid.png">
 
 </div>
 
@@ -1254,7 +1309,7 @@ class: text-center
   getCLS(console.log);
   ```
 
-<div class="px-2 py-4">
+<div class="px-2">
 
   - **实验室工具**
     - `Chrome DevTools`
@@ -1263,7 +1318,7 @@ class: text-center
 
   - **浏览器中的 PerformanceObserver 结果**
 
-  <img src="/console-cls.png">
+  <img filter="~ :dark:invert" src="/console-cls.png">
 
 </div>
 
@@ -1401,13 +1456,44 @@ layout: center
 
 ---
 
-<Tweet id="1406831784701136902" scale="0.65" />
+# PPT怎么制作的？
+为开发者打造的演示文稿工具（目前处于Beta版本）
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **Slidev引荐**
+
+  <Tweet id="1406831784701136902" scale="0.55" />
+
+<div class="px-2 py-4">
+
+  - **为什么选择 Slidev ？**
+    - `支持 Markdown 语法`
+    - `可定制主题`
+    - `对开发者友好，支持 Prism、Shiki 语法高亮`
+    - `快速，内部基于 Vite、Vue 3 和 Windi CSS`
+    - `互动性 & 直观表达，可以自由编写组件直接在 MarkDown 中使用`
+    - `可移植性，可以直接导出图片 & PDF文件`
+    - `可配置，支持 WebGL、网络请求、iframes和实时共享`
+
+  <div class="mt-4"></div>
+
+  > PPT原稿：[GitHub Repo](https://github.com/lanxuexing/web-vitails)
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
 
 ---
 layout: center
 class: text-center
 ---
-
-# 需要PPT原稿？
-
-[GitHub Repo](https://github.com/lanxuexing/web-vitails)
