@@ -1492,8 +1492,3 @@ layout: center
     @apply text-amber-500;
   }
 </style>
-
----
-layout: center
-class: text-center
----
