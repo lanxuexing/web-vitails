@@ -1058,17 +1058,18 @@ class: text-center
 
 - **定义**
   - `CLS是衡量页面整个生命周期内发生的每个意外布局偏移的最大布局偏移分数的度量`
-  > 计算方式在 2021.6.1 之后有新改动
-- **为什么只考虑 first input ？**
-  - `使用者的第一次互动体验印象相当重要`
-  - `网页最大的互动性问题通常发生在一开始载入时`
-  - `页面载入后的二次延迟有其他专门的改善解决建议`
+  > CLS指标的计算方式在 2021.04.13 之后有更新，并在 2021.06.01 起正式实施
+  <br>
+  > CLS 指标现在具有最大会话窗口，间隔为 1s，上限为 5s
+- **布局偏移通常在什么时候发生？**
+  - `资源异步加载`
+  - `DOM元素动态添加到已存在的页面元素上面`
 - **怎样才算好？**
   - <img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/9mWVASbWDLzdBUpVcjE1.svg"/>
 
 <div>
 
-  - **什么才算是 first input ？**
+  - **会话窗口（session window）**
     - <video filter="~ dark:invert" class="w-screenshot w-60" autoplay loop muted playsinline>
         <source src="https://storage.googleapis.com/web-dev-assets/better-layout-shift-metric/session-window.webm" type="video/webm">
         <source src="https://storage.googleapis.com/web-dev-assets/better-layout-shift-metric/session-window.mp4" type="video/mp4">
