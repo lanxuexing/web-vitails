@@ -1410,6 +1410,66 @@ class: text-center
 
 
 ---
+
+# 不要使用无尺寸元素 <Marker class="text-rose-400">优化一</Marker>
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **图片 & 视频**
+  > 图片和视频元素上始终需要包括 width 和 height 尺寸属性，现代浏览器会根据图像的 width 和 height 属性设置图像的默认长宽比，知道纵横（宽高）比后，浏览器就可以为元素计算和保留足够的空间
+
+- **设置宽高比**
+
+  ```scss
+  // 平时
+  img {
+    height: auto;
+    width: 100%;
+  }
+  // 现在
+  img {
+    aspect-ratio: attr(width) / attr(height);
+  }
+  ```
+
+<div class="px-2">
+
+  - **响应式**
+
+  > srcset 属性定义允许浏览器选择的图像以及每个图像的大小
+
+  <div class="mt-4"></div>
+  
+  ```html
+  <img
+    width="1000"
+    height="1000"
+    src="puppy-1000.jpg"
+    srcset="puppy-1000.jpg 1000w, puppy-2000.jpg 2000w, puppy-3000.jpg 3000w"
+    alt="Puppy with balloons"
+  />
+  ```
+
+  - **注意**
+
+    - `永远不要在现有内容之上插入内容，除非是响应用户交互，这样可确保预期的布局变化`
+    - `宁可转换动画，也不要转换触发布局变化的属性的动画`
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+
+---
 layout: center
 ---
 
