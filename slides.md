@@ -1393,10 +1393,10 @@ class: text-center
 
 <div class="mt-4"></div>
 
-- **没有尺寸的图像**
+- **图像没有尺寸**
 - **没有尺寸的广告、嵌入视图和 iframe**
 - **动态注入的内容**
-- **导致 FOIT/FOUT 的 Web 字体**
+- **Web 字体导致 FOIT / FOUT**
 - **在更新 DOM 之前等待网络响应的操作**
 
 <style>
