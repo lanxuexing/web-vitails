@@ -1621,6 +1621,29 @@ id：本地分析的id
 delta：当前值和上次获取值的差值
  -->
 
+
+---
+
+# 使用 Chrome 插件 web-vitals-extension <Marker class="text-purple-400">Tips</Marker>
+
+
+- **如何查看指标**
+  - `灰色：插件不支持或者被禁用`
+  - `绿色：通过所有指标`
+  - `红色：一个或多个指标不达标`
+
+<img class="w-100 mt-10" filter="~ :dark:invert" src="/extension.png">
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
 ---
 
 # 工具及周边 <Marker class="text-purple-400">Tips</Marker>
