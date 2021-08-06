@@ -1470,6 +1470,42 @@ class: text-center
 
 
 ---
+
+# 警惕字体变化 <Marker class="text-rose-400">优化二</Marker>
+
+> 字体通常是大文件，需要一段时间才能加载，一些浏览器直到下载完字体后才呈现文本
+
+<br>
+
+> font-display: swap 告诉浏览器默认使用系统字体进行渲染，当自定义字体下载完成之后再进行替换
+
+<br>
+
+```scss
+@font-face {
+  font-family: 'Pacifico';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/xxx.woff2) format('woff2');
+  font-display: swap;
+}
+```
+
+<br>
+
+- **使用 `<link rel="preload">` 更早的加载字体文件**
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+---
 layout: center
 ---
 
