@@ -499,7 +499,7 @@ class: text-center
 
 <div>
 
-- **应用 PRPL 即时加载**
+- **应用 PRPL 即时加载（将请求推迟到需要时再发送）**
 - **优化关键渲染路径**
 - **优化 CSS**
 - **优化 Image**
@@ -507,6 +507,14 @@ class: text-center
 - **优化 JavaScript**
 - **使用 Gzip 和 Brotli 压缩文件资源，降低传输时间**
 - **使用 service worker 缓存资源**
+
+<div class="mt-2"></div>
+
+> PRPL模式 <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Push：（推送或预加载）最重要的资源 <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Render：尽快渲染初始路线 <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pre-cache：预缓存剩余资源 <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lazy load：延迟加载其他路由和非关键资源
 
 </div>
 
