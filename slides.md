@@ -529,6 +529,10 @@ class: text-center
   }
 </style>
 
+<!-- 
+减少网络负载方法：对图像使用WebP而不是JPEG或PNG（图片要求不严格，可以压缩体积，使用tinypng.com，将JPEG图像的压缩级别设置为85
+ -->
+
 ---
 clicks: 2
 ---
