@@ -1576,6 +1576,36 @@ layout: center
 
 ---
 
+# 工具及周边 <Marker class="text-purple-400">Tips</Marker>
+
+<div class="grid grid-cols-2 gap-x-4">
+
+- **Core Web Vitals**
+  
+  <img filter="~ :dark:invert" src="https://addyosmani.com/assets/images/core-web-vitals-addy.png">
+
+<div class="px-2 py-4">
+
+  - **Tools to measure Core Web Vitals**
+
+  <img filter="~ :dark:invert" src="https://web-dev.imgix.net/image/admin/V00vjrHmwzljYo04f3d3.png">
+
+</div>
+
+</div>
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+
+---
+
 # PPT怎么制作的？
 为开发者打造的演示文稿工具（目前处于Beta版本）
 
