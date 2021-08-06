@@ -1576,6 +1576,53 @@ layout: center
 
 ---
 
+# 如何使用 Web-Vitals ？<Marker class="text-purple-400">Tips</Marker>
+
+- **简单使用**
+
+```js
+/**
+ * 每个测量函数都接收一个 report 回调函数作为参数，回调函数将在测量完成后触发，另外，对于像 LCP 和 CLS 这样的指标是不断变化的，
+ * 所以它们的回调函数可能会多次触发，如果你想获取在这期间获取每次变化的数值，你可以指定第二个参数 reportAllChanges，否则回调函
+ * 数只有在最终测量完成后触发一次。
+ */
+import {getCLS, getFID, getLCP} from 'web-vitals';
+
+getCLS(console.log, true);
+getFID(console.log); // Does not take a `reportAllChanges` param.
+getLCP(console.log, true);
+```
+
+-- **发送指标至服务器**
+
+```js
+// 变化的指标如果触发多次的话可能会多次发送到你的服务器，所以回调函数中提供了下面三个参数
+import {getCLS, getFID, getLCP} from 'web-vitals';
+
+getCLS(logDelta, true); getFID(logDelta); getLCP(logDelta, true);
+  console.log(`${name} matching ID ${id} changed by ${delta}`);
+}
+function logDelta({name, id, delta}) {
+```
+
+
+<style>
+  strong {
+    @apply text-green-500
+  }
+  blockquote {
+    @apply text-amber-500;
+  }
+</style>
+
+<!-- 
+name：指标名称
+id：本地分析的id
+delta：当前值和上次获取值的差值
+ -->
+
+---
+
 # 工具及周边 <Marker class="text-purple-400">Tips</Marker>
 
 <div class="grid grid-cols-2 gap-x-4">
