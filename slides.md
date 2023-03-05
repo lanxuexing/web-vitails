@@ -15,10 +15,12 @@ title: Web Vitals
 
 谷歌的新一代 Web 性能体验和质量指标
 
+<div>
 <a href="https://github.com/lanxuexing/web-vitails" target="_blank" alt="GitHub"
   class="abs-br m-6 text-xl icon-btn opacity-50 !border-none !hover:text-white">
   <carbon-logo-github />
 </a>
+</div>
 
 ---
 
