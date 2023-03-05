@@ -9,9 +9,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  # schedule:
-  #   # * is a special character in YAML so you have to quote this string
-  #   - cron: '10 02,16 * * *'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '55 2,17 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
